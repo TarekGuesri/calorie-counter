@@ -1,0 +1,99 @@
+// Fonts
+@import 'https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700';
+$font-primary: 'Poppins', sans-serif;
+
+.font-paragraph {
+  font-family: $font-primary;
+  font-size: 1.1em;
+  font-weight: 300;
+  line-height: 1.7em;
+}
+
+// Colors
+// Method one use simple variables
+$primary-color: #f7685b;
+$secondary-color: white;
+$first-accent-color: red;
+$second-accent-color: grey;
+$third-accent-color: blue;
+
+// Method two use mapping colors
+$primary-colors: (
+  'primary': red,
+  'primary-dark-mode': black,
+);
+$secondary-colors: (
+  'secondary': orange,
+  'secodary-dark-mode': grey,
+);
+$accent-colors: (
+  'first-color': green,
+  'second-color': blue,
+  'third-color': purple,
+);
+
+@each $name, $color in $primary-colors {
+  .color-#{$name} {
+    color: $color;
+  }
+}
+
+@each $name, $color in $secondary-colors {
+  .color-#{$name} {
+    color: $color;
+  }
+}
+
+@each $name, $color in $accent-colors {
+  .color-#{$name} {
+    color: $color;
+  }
+}
+
+// Margin and padding classes
+$spaceamounts: (6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26);
+
+@each $space in $spaceamounts {
+  .m-#{$space} {
+    margin: #{$space}rem;
+  }
+  .my-#{$space} {
+    margin: #{$space}rem 0;
+  }
+  .mx-#{$space} {
+    margin: 0 #{$space}rem;
+  }
+  .mr-#{$space} {
+    margin-right: #{$space}rem;
+  }
+  .ml-#{$space} {
+    margin-left: #{$space}rem;
+  }
+  .mt-#{$space} {
+    margin-top: #{$space}rem;
+  }
+  .mb-#{$space} {
+    margin-bottom: #{$space}rem;
+  }
+  .p-#{$space} {
+    padding: #{$space}rem;
+  }
+  .py-#{$space} {
+    padding: #{$space}rem 0;
+  }
+  .px-#{$space} {
+    padding: 0 #{$space}rem;
+  }
+  .pr-#{$space} {
+    padding-right: #{$space}rem;
+  }
+  .pl-#{$space} {
+    padding-left: #{$space}rem;
+  }
+  .pt-#{$space} {
+    padding-top: #{$space}rem;
+  }
+  .pl-#{$space} {
+    padding-bottom: #{$space}rem;
+  }
+}
