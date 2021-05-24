@@ -45,36 +45,11 @@ const Navbar = () => {
               </a>
             </li>
             <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                id="dropdown07XL"
-                data-bs-toggle="dropdown"
-                aria-expanded="true"
-              >
-                Dropdown
-              </a>
-              <ul class="dropdown-menu" aria-labelledby="dropdown07XL">
-                <li>
-                  <a class="dropdown-item" href="#">
-                    Action
-                  </a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="#">
-                    Another action
-                  </a>
-                </li>
-                <li>
-                  <a class="dropdown-item" href="#">
-                    Something else here
-                  </a>
-                </li>
-              </ul>
+              <UserMenu location="collapse" />
             </li>
           </ul>
         </div>
-        <UserMenu />
+        <UserMenu location="outside" />
       </div>
     </nav>
   );
