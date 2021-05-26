@@ -1,4 +1,4 @@
-import './styles/App.scss';
+import 'src/styles/App.scss';
 import Navbar from 'src/components/layout/Navbar';
 import { HomePage } from 'src/pages/pageListAsync';
 

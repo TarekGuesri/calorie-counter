@@ -7,7 +7,7 @@ const auth = false;
 const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <div className="container-fluid px-5" style={{ maxWidth: '1165px' }}>
+      <div className="container-fluid box px-5">
         <a className="navbar-brand" href="#">
           CaloriesCounter
         </a>
