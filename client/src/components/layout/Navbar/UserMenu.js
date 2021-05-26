@@ -20,7 +20,7 @@ const UserMenu = ({ location }) => {
             alt="profile"
           />
           <span className="mx-2">
-            John Doe <i class="bi bi-chevron-down"></i>
+            John Doe <i className="bi bi-chevron-down"></i>
           </span>
         </a>
         <ul

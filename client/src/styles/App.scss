@@ -3,9 +3,7 @@
 
 body {
   font-family: 'Poppins', sans-serif;
-  background: #f5f6f8;
-  // backround-color: $primary-color;
-  // @extend .color-primary;
+  background: #f3f6ef;
 }
 
 p {
@@ -23,6 +21,11 @@ a:focus {
 .bg-light {
   background-color: #ffffff !important;
 }
+
+/* ---------------------------------------------------
+    Navbar Style
+----------------------------------------------------- */
+
 .nav-item img {
   border-radius: 50%;
   border-style: none;
@@ -33,96 +36,27 @@ a:focus {
   content: none !important;
 }
 
-.add {
-  background-color: $primary-color;
-  padding: 12px 30px;
-  color: #ffffff;
-  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease 0s;
-}
-.add:hover {
-  background-color: #2ee59d;
-  box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
-  color: #fff;
-  transform: translateY(-7px);
-}
-.btn-check:focus + .btn,
-.btn:focus {
-  box-shadow: 0;
-}
-.fa,
-.far,
-.fas {
-  font-size: 18px;
-  padding: 5px;
-  color: #c2cfe0;
-}
-.dropdown-menu[data-bs-popper] {
-  left: auto;
-  right: 0;
-}
-.title {
-  border-bottom: #ebeff2 2px solid;
-  margin-bottom: 5px;
-}
-.nameProfile {
-  font-weight: 600;
-}
-.actionProfile {
-  font-weight: 300;
-  color: rgb(180, 179, 179);
-}
-.searchbar {
-  margin-bottom: auto;
-  margin-top: auto;
-  height: 47px;
-  background-color: #353b48;
-  border-radius: 30px;
-  padding: 3px;
-}
-
-.search_input {
-  color: white;
-  border: 0;
-  outline: 0;
-  background: none;
-  width: 0;
-  caret-color: transparent;
-  line-height: 40px;
-  transition: width 0.4s linear;
-}
-
-.searchbar:hover > .search_input {
-  padding: 0 10px;
-  width: 450px;
-  caret-color: red;
-  transition: width 0.4s linear;
-}
-
-.searchbar:hover > .search_icon {
-  background: white;
-  color: #e74c3c;
-}
-
-.search_icon {
-  height: 40px;
-  width: 40px;
-  float: right;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  color: white;
-  text-decoration: none;
-}
-
 nav {
-  .breadcrumb {
-    margin-bottom: -1px !important;
-    padding: 0 42px;
-  }
   .icon {
     margin-top: -5px;
     margin-right: 6px;
+  }
+}
+
+.navbar-brand {
+  color: $primary-color !important;
+}
+
+.primary-button {
+  color: #fff !important;
+  padding: 6px 20px 6px 20px;
+  background: $primary-color;
+  box-shadow: 0px 5px 15px #dce1ff;
+  border-radius: 4px;
+  &:hover {
+    background: $primary-color;
+  }
+  &:focus {
+    outline: none;
   }
 }

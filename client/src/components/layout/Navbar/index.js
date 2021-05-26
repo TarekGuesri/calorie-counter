@@ -1,15 +1,18 @@
 import React from 'react';
 import UserMenu from './UserMenu';
+import AuthButtons from './AuthButtons';
+
+const auth = false;
 
 const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <div className="container-fluid">
-        <a class="navbar-brand" href="#">
+      <div className="container-fluid px-5" style={{ maxWidth: '1165px' }}>
+        <a className="navbar-brand" href="#">
           CaloriesCounter
         </a>
         <button
-          class="navbar-toggler"
+          className="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbar"
@@ -17,39 +20,48 @@ const Navbar = () => {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span class="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon"></span>
         </button>
         <div
           className="collapse navbar-collapse justify-content-md-center"
           id="navbar"
         >
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">
+          <ul className="navbar-nav">
+            <li className="nav-item">
+              <a className="nav-link active" aria-current="page" href="#">
                 Centered nav only
               </a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">
+            <li className="nav-item">
+              <a className="nav-link" href="#">
                 Link
               </a>
             </li>
-            <li class="nav-item">
+            <li className="nav-item">
               <a
-                class="nav-link disabled"
+                className="nav-link disabled"
                 href="#"
-                tabindex="-1"
+                tabIndex="-1"
                 aria-disabled="true"
               >
                 Disabled
               </a>
             </li>
-            <li class="nav-item dropdown">
-              <UserMenu location="collapse" />
-            </li>
+
+            {auth ? (
+              <li className="nav-item dropdown">
+                <UserMenu location="collapse" />
+              </li>
+            ) : (
+              <AuthButtons location="collapse" />
+            )}
           </ul>
         </div>
-        <UserMenu location="outside" />
+        {auth ? (
+          <UserMenu location="outside" />
+        ) : (
+          <AuthButtons location="outside" />
+        )}
       </div>
     </nav>
   );
