@@ -6,7 +6,13 @@ const auth = false;
 
 const Navbar = () => {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav
+      className="navbar navbar-expand-lg navbar-light fixed-top"
+      style={{
+        backgroundColor: '#FDFDFD',
+        boxShadow: '0 2px 4px 0 rgba(0,0,0,.2)',
+      }}
+    >
       <div className="container-fluid box px-5">
         <a className="navbar-brand" href="#">
           CaloriesCounter
