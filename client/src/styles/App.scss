@@ -18,6 +18,7 @@ a:focus {
   text-decoration: none;
   transition: all 0.3s;
 }
+
 .bg-light {
   background-color: #ffffff !important;
 }
@@ -48,6 +49,10 @@ nav {
 }
 
 .navbar-brand {
+  color: $primary-color !important;
+}
+
+.nav-link.active {
   color: $primary-color !important;
 }
 

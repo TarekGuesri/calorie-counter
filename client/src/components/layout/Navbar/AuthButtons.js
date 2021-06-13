@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const AuthButtons = ({ location }) => {
@@ -7,14 +8,14 @@ const AuthButtons = ({ location }) => {
     return (
       <>
         <li className={`navbar-item${display}`}>
-          <a className="nav-link" aria-current="page" href="#">
+          <NavLink className="nav-link" aria-current="page" to="/login">
             Log in
-          </a>
+          </NavLink>
         </li>
         <li className={`navbar-item${display}`}>
-          <a className="nav-link" aria-current="page" href="#">
+          <NavLink className="nav-link" aria-current="page" to="/register">
             Sign up
-          </a>
+          </NavLink>
         </li>
       </>
     );
@@ -22,18 +23,18 @@ const AuthButtons = ({ location }) => {
     return (
       <ul className={`navbar-nav${display}`}>
         <li className="nav-item">
-          <a className="nav-link" aria-current="page" href="#">
+          <Link className="nav-link" aria-current="page" to="#">
             Log in
-          </a>
+          </Link>
         </li>
         <li className="nav-item">
-          <a
+          <Link
             className="nav-link primary-button ms-2"
             aria-current="page"
-            href="#"
+            to="#"
           >
             Sign up
-          </a>
+          </Link>
         </li>
       </ul>
     );

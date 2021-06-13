@@ -3,8 +3,6 @@ import React from 'react';
 import Feature from './Feature';
 import features from './dummyFeatures';
 
-console.log(features);
-
 const Features = () => {
   return (
     <section id="hero">

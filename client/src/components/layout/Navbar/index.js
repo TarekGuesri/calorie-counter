@@ -1,4 +1,6 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
+
 import UserMenu from './UserMenu';
 import AuthButtons from './AuthButtons';
 
@@ -7,16 +9,16 @@ const auth = false;
 const Navbar = () => {
   return (
     <nav
-      className="navbar navbar-expand-lg navbar-light fixed-top"
+      className="navbar navbar-expand-lg navbar-light navbar-static-top"
       style={{
         backgroundColor: '#FDFDFD',
         boxShadow: '0 2px 4px 0 rgba(0,0,0,.2)',
       }}
     >
       <div className="container-fluid box px-5">
-        <a className="navbar-brand" href="#">
+        <NavLink className="navbar-brand" to="/page">
           CaloriesCounter
-        </a>
+        </NavLink>
         <button
           className="navbar-toggler"
           type="button"
@@ -34,24 +36,19 @@ const Navbar = () => {
         >
           <ul className="navbar-nav">
             <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="#">
+              <NavLink className="nav-link" aria-current="page" exact to="/">
                 Centered nav only
-              </a>
+              </NavLink>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">
-                Link
-              </a>
-            </li>
-            <li className="nav-item">
-              <a
+              <NavLink
                 className="nav-link disabled"
-                href="#"
+                to="/page"
                 tabIndex="-1"
                 aria-disabled="true"
               >
                 Disabled
-              </a>
+              </NavLink>
             </li>
 
             {auth ? (
