@@ -2,7 +2,7 @@ import React from 'react';
 import UserMenu from './UserMenu';
 import AuthButtons from './AuthButtons';
 
-const auth = true;
+const auth = false;
 
 const Navbar = () => {
   return (
