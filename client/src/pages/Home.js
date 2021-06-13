@@ -4,9 +4,9 @@ import 'src/styles/Home.scss';
 
 const Home = () => {
   return (
-    <div>
+    <>
       <Hero />
-    </div>
+    </>
   );
 };
 

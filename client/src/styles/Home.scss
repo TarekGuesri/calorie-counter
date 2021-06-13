@@ -5,11 +5,15 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 584px;
+  height: 640px;
 }
 
 #hero {
   h1 {
     color: black;
+    max-width: 600px;
+  }
+  p {
+    max-width: 800px;
   }
 }
