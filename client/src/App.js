@@ -4,10 +4,10 @@ import { HomePage } from 'src/pages/pageListAsync';
 
 function App() {
   return (
-    <div>
+    <>
       <Navbar />
       <HomePage />
-    </div>
+    </>
   );
 }
 
