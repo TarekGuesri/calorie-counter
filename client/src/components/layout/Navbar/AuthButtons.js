@@ -23,7 +23,7 @@ const AuthButtons = ({ location }) => {
     return (
       <ul className={`navbar-nav${display}`}>
         <li className="nav-item">
-          <Link className="nav-link" aria-current="page" to="#">
+          <Link className="nav-link" aria-current="page" to="/login">
             Log in
           </Link>
         </li>
@@ -31,7 +31,7 @@ const AuthButtons = ({ location }) => {
           <Link
             className="nav-link primary-button ms-2"
             aria-current="page"
-            to="#"
+            to="/register"
           >
             Sign up
           </Link>
