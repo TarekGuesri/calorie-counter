@@ -12,7 +12,7 @@ const Hero = () => {
             lose weight.
           </p>
           <a
-            className="primary-button btn-lg rounded-pill disabled mt-5 py-2 px-4"
+            className="primary-button btn-lg rounded-pill mt-5 py-2 px-4"
             href="#"
             role="button"
           >

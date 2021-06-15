@@ -83,3 +83,10 @@ button {
   border-radius: 4px;
   border-style: none;
 }
+.primary-button[disabled] {
+  background: rgba($primary-color, 0.6) !important;
+}
+
+/* ---------------------------------------------------
+    Spinner Style
+----------------------------------------------------- */
