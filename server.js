@@ -3,9 +3,13 @@ const dotenv = require('dotenv');
 const morgan = require('morgan');
 const colors = require('colors');
 const path = require('path');
+const connectDB = require('./config/db');
 
 // Load env vars
 dotenv.config({ path: './config/config.env' });
+
+// Connect to database
+connectDB();
 
 const app = express();
 
@@ -13,10 +17,6 @@ const app = express();
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
-
-app.get('/', (req, res) => {
-  res.send('Hello World');
-});
 
 // Serve static assets in production
 if (process.env.NODE_ENV === 'production') {
