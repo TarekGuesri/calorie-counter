@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
 const colors = require('colors');
@@ -12,6 +13,9 @@ dotenv.config({ path: './config/config.env' });
 connectDB();
 
 const app = express();
+
+// Enabling cors
+app.use(cors());
 
 // Dev logging middleware
 if (process.env.NODE_ENV === 'development') {
@@ -27,6 +31,9 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
   );
 }
+
+// Define Routes
+app.use('/rest', require('./routes/rest'));
 
 const PORT = process.env.PORT || 5000;
 

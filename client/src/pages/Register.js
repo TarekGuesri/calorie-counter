@@ -1,12 +1,18 @@
 import React from 'react';
+import axios from 'axios';
 
 import TextInput from 'src/components/forms/TextInput';
 import 'src/styles/Auth.scss';
 
 const Register = () => {
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    const res = await axios.post('auth/register');
+    console.log(res);
+  };
   return (
     <div className="form-box text-center p-5 m-5 mx-auto bg-light">
-      <form className="form-signin">
+      <form className="form-signin" onSubmit={handleRegister}>
         <h1 className="form-title h3 mb-5 font-weight-normal">
           Create an account
         </h1>
