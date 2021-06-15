@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const UserMenu = ({ location }) => {
-  console.log(location);
   const display = location === 'collapse' ? ' d-lg-none' : ' d-none d-lg-block';
   return (
     <ul className={`navbar-nav ms-auto${display}`}>
