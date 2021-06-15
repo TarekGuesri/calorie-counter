@@ -8,15 +8,9 @@ const auth = false;
 
 const Navbar = () => {
   return (
-    <nav
-      className="navbar navbar-expand-lg navbar-light navbar-static-top"
-      style={{
-        backgroundColor: '#FDFDFD',
-        boxShadow: '0 2px 4px 0 rgba(0,0,0,.2)',
-      }}
-    >
+    <nav className="navbar navbar-expand-lg navbar-light navbar-static-top">
       <div className="container-fluid box px-5">
-        <NavLink className="navbar-brand" to="/page">
+        <NavLink className="navbar-brand" to="/">
           CaloriesCounter
         </NavLink>
         <button

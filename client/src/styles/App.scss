@@ -31,6 +31,11 @@ a:focus {
     Navbar Style
 ----------------------------------------------------- */
 
+.navbar {
+  background-color: #fdfdfd;
+  box-shadow: 0 2px 4px 0 rgba($primary-color, 0.1);
+}
+
 .nav-item img {
   border-radius: 50%;
   border-style: none;
