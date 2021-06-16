@@ -56,7 +56,7 @@ const Register = () => {
   return (
     <div className="form-box text-center p-5 m-5 mx-auto bg-light">
       <Helmet>
-        <title>{`${WEBSITE_NAME} - Register`}</title>
+        <title>{`${WEBSITE_NAME} - Sign up`}</title>
       </Helmet>
       <form className="form-signin" onSubmit={handleRegister}>
         <h1 className="form-title h3 mb-5 font-weight-normal">
