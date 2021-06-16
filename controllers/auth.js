@@ -71,7 +71,7 @@ exports.registerUser = async (req, res) => {
       }
     );
   } catch (error) {
-    errorLogger(error);
+    errorLogger(req, 2, error);
     res.status(500).send('Server error');
   }
 };
@@ -119,7 +119,7 @@ exports.loginUser = async (req, res) => {
       }
     );
   } catch (error) {
-    errorLogger(error);
+    errorLogger(req, 2, error);
     res.status(500).send('Server error');
   }
 };
