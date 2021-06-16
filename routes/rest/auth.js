@@ -1,9 +1,19 @@
 const express = require('express');
 const { check } = require('express-validator');
 
-const { registerUser, loginUser } = require('../../controllers/auth');
+const auth = require('../../middleware/auth');
+const {
+  registerUser,
+  loginUser,
+  checkSelf,
+} = require('../../controllers/auth');
 
 const router = express.Router();
+
+// @route GET auth/
+// @desc Get self data
+// @access Private
+router.get('/', auth, checkSelf);
 
 // @route POST auth/register
 // @desc Registers a user

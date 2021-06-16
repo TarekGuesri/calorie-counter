@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import Helmet from 'react-helmet';
+import { connect } from 'react-redux';
 import axios from 'axios';
 
 import { WEBSITE_NAME } from 'src/utils/brand';
 import TextInput from 'src/components/forms/TextInput';
 import AsyncButton from 'src/components/buttons/AsyncButton';
 import 'src/styles/Auth.scss';
+import { login } from 'src/actions/auth';
 
-const Login = () => {
+const Login = ({ isAuthenticated, login }) => {
   const [state, setState] = useState({
     email: 'test@mail.com',
     password: '123',
@@ -27,6 +29,8 @@ const Login = () => {
     const formData = { email, password };
     try {
       const res = await axios.post('auth/login', formData);
+
+      login(res.data);
 
       // TODO : Add auth to global state
       console.log(res);
@@ -86,4 +90,8 @@ const Login = () => {
   );
 };
 
-export default Login;
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { login })(Login);
