@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import axios from 'axios';
@@ -33,7 +34,6 @@ const Login = ({ isAuthenticated, login }) => {
       login(res.data);
 
       // TODO : Add auth to global state
-      console.log(res);
     } catch (error) {
       const {
         response: {
@@ -93,5 +93,10 @@ const Login = ({ isAuthenticated, login }) => {
 const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
 });
+
+Login.propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired,
+  login: PropTypes.func.isRequired,
+};
 
 export default connect(mapStateToProps, { login })(Login);

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import setAuthToken from 'src/utils/setAuthToken';
 
-import { USER_LOADED, LOGIN_SUCCESS, AUTH_ERROR } from './types';
+import { USER_LOADED, LOGIN_SUCCESS, AUTH_ERROR, LOGOUT } from './types';
 
 // Login User
 export const login = (response) => (dispatch) => {
@@ -28,4 +28,9 @@ export const loadUser = () => async (dispatch) => {
   } else {
     dispatch({ type: AUTH_ERROR });
   }
+};
+
+// Logout User
+export const logout = () => async (dispatch) => {
+  dispatch({ type: LOGOUT });
 };
