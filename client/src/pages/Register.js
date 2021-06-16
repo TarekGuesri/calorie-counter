@@ -26,6 +26,15 @@ const Register = () => {
     setState({ ...state, errors: [] });
     const { username, email, password, confirmPassword } = state;
 
+    if (password !== confirmPassword) {
+      setState((prevState) => ({
+        ...prevState,
+        errors: [{ param: 'confirmPassword', msg: 'Passwords do not match' }],
+      }));
+
+      return;
+    }
+
     const formData = { username, email, password };
     try {
       const res = await axios.post('auth/register', formData);
@@ -38,7 +47,7 @@ const Register = () => {
           data: { errors },
         },
       } = error;
-      setState({ ...state, errors });
+      setState((prevState) => ({ ...prevState, errors }));
     }
   };
 
