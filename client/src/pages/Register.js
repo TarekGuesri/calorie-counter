@@ -108,12 +108,6 @@ const Register = ({ isAuthenticated, login }) => {
           onChange={handleOnChange}
         />
 
-        <div className="checkbox my-3">
-          <label>
-            <input type="checkbox" defaultValue="remember-me" /> Remember me
-          </label>
-        </div>
-
         <AsyncButton
           type="submit"
           text="Sign up"

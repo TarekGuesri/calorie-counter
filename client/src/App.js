@@ -7,7 +7,7 @@ import axios from 'axios';
 import 'src/styles/App.scss';
 import Navbar from 'src/components/layout/Navbar';
 import { HomePage, RegisterPage, LoginPage } from 'src/pages/pageListAsync';
-import Spinner from 'src/components/layout/Spinner';
+import PageSpinner from 'src/components/layout/PageSpinner';
 import setAuthToken from 'src/utils/setAuthToken';
 import { loadUser, logout } from 'src/actions/auth';
 
@@ -31,12 +31,9 @@ function App({ loading, loadUser, logout }) {
   }, []);
 
   if (loading) {
-    return (
-      <div className="text-success">
-        <Spinner style={{ marginTop: '46vh' }} />{' '}
-      </div>
-    );
+    return <PageSpinner />;
   }
+
   return (
     <Router>
       <Navbar />
