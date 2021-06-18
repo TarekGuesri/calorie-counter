@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const UserMenu = ({ location }) => {
+const UserMenu = ({ location, logout }) => {
   const display = location === 'collapse' ? ' d-lg-none' : ' d-none d-lg-block';
   return (
     <ul className={`navbar-nav ms-auto${display}`}>
@@ -37,7 +37,7 @@ const UserMenu = ({ location }) => {
             </a>
           </li>
           <li>
-            <a className="dropdown-item" href="#">
+            <a onClick={logout} className="dropdown-item" href="#!">
               <i className="fas fa-sign-out-alt"></i> Logout
             </a>
           </li>
@@ -49,6 +49,7 @@ const UserMenu = ({ location }) => {
 
 UserMenu.propTypes = {
   location: PropTypes.oneOf(['collapse', 'outside']),
+  logout: PropTypes.func.isRequired,
 };
 
 export default UserMenu;

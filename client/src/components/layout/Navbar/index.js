@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
+import { logout } from 'src/actions/auth';
+
 import UserMenu from './UserMenu';
 import AuthButtons from './AuthButtons';
 
-const Navbar = ({ isAuthenticated }) => {
-  console.log(isAuthenticated);
+const Navbar = ({ isAuthenticated, logout }) => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light navbar-static-top">
       <div className="container-fluid box px-5">
@@ -48,7 +49,7 @@ const Navbar = ({ isAuthenticated }) => {
 
             {isAuthenticated ? (
               <li className="nav-item dropdown">
-                <UserMenu location="collapse" />
+                <UserMenu logout={logout} location="collapse" />
               </li>
             ) : (
               <AuthButtons location="collapse" />
@@ -56,7 +57,7 @@ const Navbar = ({ isAuthenticated }) => {
           </ul>
         </div>
         {isAuthenticated ? (
-          <UserMenu location="outside" />
+          <UserMenu logout={logout} location="outside" />
         ) : (
           <AuthButtons location="outside" />
         )}
@@ -71,6 +72,7 @@ const mapStateToProps = (state) => ({
 
 Navbar.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
+  logout: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps)(Navbar);
+export default connect(mapStateToProps, { logout })(Navbar);
