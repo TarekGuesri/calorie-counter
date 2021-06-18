@@ -7,6 +7,7 @@ import axios from 'axios';
 
 import { WEBSITE_NAME } from 'src/utils/brand';
 import TextInput from 'src/components/forms/TextInput';
+import CheckBox from 'src/components/forms/CheckBox';
 import AsyncButton from 'src/components/buttons/AsyncButton';
 import 'src/styles/Auth.scss';
 import { login } from 'src/actions/auth';
@@ -15,12 +16,20 @@ const Login = ({ isAuthenticated, login }) => {
   const [state, setState] = useState({
     email: 'test@mail.com',
     password: '123',
+    remember: false,
     loading: false,
     errors: [],
   });
 
   const handleOnChange = async (e) => {
     setState({ ...state, [e.target.name]: e.target.value });
+  };
+
+  const handleCheck = async (e) => {
+    setState((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.checked,
+    }));
   };
 
   const handleRegister = async (e) => {
@@ -45,7 +54,7 @@ const Login = ({ isAuthenticated, login }) => {
     }
   };
 
-  const { email, password, loading, errors } = state;
+  const { email, password, remember, loading, errors } = state;
 
   if (isAuthenticated) {
     return <Redirect to="/" />;
@@ -78,10 +87,13 @@ const Login = ({ isAuthenticated, login }) => {
           onChange={handleOnChange}
         />
 
-        <div className="checkbox my-3">
-          <label>
-            <input type="checkbox" defaultValue="remember-me" /> Remember me
-          </label>
+        <div className="my-4">
+          <CheckBox
+            name="remember"
+            text="Remember me"
+            checked={remember}
+            onChange={handleCheck}
+          />
         </div>
 
         <AsyncButton
