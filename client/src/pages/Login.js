@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import axios from 'axios';
@@ -45,6 +46,10 @@ const Login = ({ isAuthenticated, login }) => {
   };
 
   const { email, password, loading, errors } = state;
+
+  if (isAuthenticated) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <div className="form-box text-center p-5 m-5 mx-auto bg-light">

@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
+import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 import axios from 'axios';
 
 import { WEBSITE_NAME } from 'src/utils/brand';
 import TextInput from 'src/components/forms/TextInput';
 import AsyncButton from 'src/components/buttons/AsyncButton';
 import 'src/styles/Auth.scss';
+import { login } from 'src/actions/auth';
 
-const Register = () => {
+const Register = ({ isAuthenticated, login }) => {
   const [state, setState] = useState({
     username: 'john',
     email: 'test@mail.com',
@@ -52,6 +56,10 @@ const Register = () => {
   };
 
   const { username, email, password, confirmPassword, loading, errors } = state;
+
+  if (isAuthenticated) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <div className="form-box text-center p-5 m-5 mx-auto bg-light">
@@ -117,4 +125,13 @@ const Register = () => {
   );
 };
 
-export default Register;
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+Register.propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired,
+  login: PropTypes.func.isRequired,
+};
+
+export default connect(mapStateToProps, { login })(Register);
