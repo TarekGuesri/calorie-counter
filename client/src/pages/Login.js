@@ -34,10 +34,10 @@ const Login = ({ isAuthenticated, login }) => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    setState({ ...state, errors: [] });
-    const { email, password } = state;
+    setState({ ...state, errors: [], loading: true });
+    const { email, password, remember } = state;
 
-    const formData = { email, password };
+    const formData = { email, password, remember };
     try {
       const res = await axios.post('auth/login', formData);
 
@@ -50,7 +50,7 @@ const Login = ({ isAuthenticated, login }) => {
           data: { errors },
         },
       } = error;
-      setState((prevState) => ({ ...prevState, errors }));
+      setState((prevState) => ({ ...prevState, errors, loading: false }));
     }
   };
 

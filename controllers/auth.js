@@ -82,7 +82,7 @@ exports.loginUser = async (req, res) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  const { email, password } = req.body;
+  const { email, password, remember } = req.body;
 
   try {
     const user = await User.findOne({ email });
@@ -107,17 +107,12 @@ exports.loginUser = async (req, res) => {
       },
     };
 
-    // TODO : Add remember me option to extend jwt duration
+    const expiresIn = remember ? '60 days' : '2 days';
 
-    jwt.sign(
-      payload,
-      process.env.JWT_SECRET,
-      { expiresIn: '2 days' },
-      (err, token) => {
-        if (err) throw err;
-        res.json({ token });
-      }
-    );
+    jwt.sign(payload, process.env.JWT_SECRET, { expiresIn }, (err, token) => {
+      if (err) throw err;
+      res.json({ token });
+    });
   } catch (error) {
     errorLogger(req, 2, error);
     res.status(500).send('Server error');

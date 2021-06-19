@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
@@ -27,13 +27,14 @@ const Register = ({ isAuthenticated, login }) => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    setState({ ...state, errors: [] });
+    setState({ ...state, errors: [], loading: true });
     const { username, email, password, confirmPassword } = state;
 
     if (password !== confirmPassword) {
       setState((prevState) => ({
         ...prevState,
         errors: [{ param: 'confirmPassword', msg: 'Passwords do not match' }],
+        loading: false,
       }));
 
       return;
@@ -45,13 +46,17 @@ const Register = ({ isAuthenticated, login }) => {
 
       // TODO : Log in then redirect to today's list
       console.log(res);
+      setState((prevState) => ({
+        ...prevState,
+        loading: false,
+      }));
     } catch (error) {
       const {
         response: {
           data: { errors },
         },
       } = error;
-      setState((prevState) => ({ ...prevState, errors }));
+      setState((prevState) => ({ ...prevState, errors, loading: false }));
     }
   };
 
@@ -107,6 +112,15 @@ const Register = ({ isAuthenticated, login }) => {
           errors={errors}
           onChange={handleOnChange}
         />
+
+        <div className="my-4">
+          <p>
+            Do you have an account already? log in{' '}
+            <Link style={{ fontWeight: '400' }} to="/login">
+              here
+            </Link>{' '}
+          </p>
+        </div>
 
         <AsyncButton
           type="submit"

@@ -14,7 +14,7 @@ p {
 a,
 a:hover,
 a:focus {
-  color: inherit;
+  color: $primary-color;
   text-decoration: none;
   transition: all 0.3s;
 }
