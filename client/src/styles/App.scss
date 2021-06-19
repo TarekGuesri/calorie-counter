@@ -61,6 +61,19 @@ nav {
   color: $primary-color !important;
 }
 
+.navbar-toggler:hover {
+  background-color: $primary-color;
+  border: 0;
+}
+
+.navbar-toggler:hover > .fas {
+  color: white;
+}
+
+.navbar-toggler:focus {
+  box-shadow: none;
+}
+
 /* ---------------------------------------------------
     Buttons Style
 ----------------------------------------------------- */
@@ -85,6 +98,16 @@ button {
 }
 .primary-button[disabled] {
   background: rgba($primary-color, 0.6) !important;
+}
+
+.btn-circle {
+  width: 40px;
+  height: 40px;
+  padding: 6px 0px;
+  border-radius: 21px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.42857;
 }
 
 /* ---------------------------------------------------

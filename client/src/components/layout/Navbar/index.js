@@ -16,7 +16,7 @@ const Navbar = ({ isAuthenticated, logout }) => {
           CaloriesCounter
         </NavLink>
         <button
-          className="navbar-toggler"
+          className="navbar-toggler btn-circle btn-lg"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbar"
@@ -24,7 +24,7 @@ const Navbar = ({ isAuthenticated, logout }) => {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span className="navbar-toggler-icon"></span>
+          <i className="fas fa-bars fa-lg"></i>
         </button>
         <div
           className="collapse navbar-collapse justify-content-md-center"
