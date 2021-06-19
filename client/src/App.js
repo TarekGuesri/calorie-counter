@@ -1,15 +1,16 @@
 import { useEffect } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
-import 'src/styles/App.scss';
 import Navbar from 'src/components/layout/Navbar';
+import Application from './Application';
 import { HomePage, RegisterPage, LoginPage } from 'src/pages/pageListAsync';
 import PageSpinner from 'src/components/layout/PageSpinner';
 import setAuthToken from 'src/utils/setAuthToken';
 import { loadUser, logout } from 'src/actions/auth';
+import 'src/styles/App.scss';
 
 // Setting Axios' base settings
 axios.defaults.baseURL = 'http://localhost:5000/rest';
@@ -41,6 +42,7 @@ function App({ loading, loadUser, logout }) {
         <Route exact path="/" component={HomePage} />
         <Route path="/login" component={LoginPage} />
         <Route path="/register" component={RegisterPage} />
+        <Route component={Application} />
       </Switch>
     </Router>
   );

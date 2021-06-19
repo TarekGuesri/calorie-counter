@@ -5,6 +5,8 @@ import PageSpinner from 'src/components/layout/PageSpinner';
 const Home = lazy(() => import('./Home'));
 const Login = lazy(() => import('./Login'));
 const Register = lazy(() => import('./Register'));
+const TodayCalories = lazy(() => import('./TodayCalories'));
+const NotFound = lazy(() => import('./NotFound'));
 
 export const HomePage = () => (
   <Suspense fallback={<PageSpinner />}>
@@ -19,5 +21,15 @@ export const LoginPage = () => (
 export const RegisterPage = () => (
   <Suspense fallback={<PageSpinner />}>
     <Register />
+  </Suspense>
+);
+export const TodayCaloriesPage = () => (
+  <Suspense fallback={<PageSpinner />}>
+    <TodayCalories />
+  </Suspense>
+);
+export const NotFoundPage = () => (
+  <Suspense fallback={<PageSpinner />}>
+    <NotFound />
   </Suspense>
 );
