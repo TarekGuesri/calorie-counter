@@ -1,0 +1,178 @@
+@import 'config';
+@import 'utilities';
+
+.list-wrap {
+  padding: 40px 0;
+  font-family: 'Open Sans', sans-serif;
+}
+.main-heading {
+  font-size: 19px;
+  margin-bottom: 20px;
+}
+.table-list table {
+  width: 100%;
+}
+.table-list thead {
+  border-bottom: 1px solid #e5e5e5;
+  margin-bottom: 5px;
+}
+.table-list thead tr th {
+  padding: 8px 0 18px;
+  color: #484848;
+  font-size: 15px;
+  font-weight: 400;
+}
+.table-list tr td {
+  padding: 40px 0 27px;
+  vertical-align: middle;
+}
+.table-list tr td:nth-child(1) {
+  width: 52%;
+}
+.table-list tr td:nth-child(2) {
+  width: 26%;
+}
+.table-list tr td:nth-child(3) {
+  width: 13.333%;
+}
+.table-list tr td:nth-child(4) {
+  width: 8.667%;
+  text-align: right;
+}
+.table-list tr td .img-food {
+  width: 72px;
+  float: left;
+  margin-left: 8px;
+  margin-right: 31px;
+  line-height: 63px;
+}
+.table-list tr td .img-food img {
+  width: 100%;
+}
+.table-list tr td .name-food {
+  font-size: 15px;
+  color: #484848;
+  line-height: 24px;
+  width: 50%;
+}
+.table-list tr td .price {
+  text-align: right;
+  line-height: 64px;
+  margin-right: 40px;
+  color: #989898;
+  font-size: 16px;
+  font-family: 'Nunito';
+}
+.table-list tr td .quanlity {
+  position: relative;
+}
+.food-count .qtyminus,
+.food-count .qtyplus {
+  width: 34px;
+  height: 34px;
+  background: transparent;
+  text-align: center;
+  font-size: 19px;
+  line-height: 34px;
+  color: #000;
+  cursor: pointer;
+  font-weight: 600;
+}
+.food-count .qtyminus {
+  line-height: 32px;
+}
+.food-count .qtyminus {
+  border-radius: 3px 0 0 3px;
+}
+.food-count .qtyplus {
+  border-radius: 0 3px 3px 0;
+}
+.food-count .qty {
+  width: 60px;
+  text-align: center;
+  border: none;
+}
+.count-inlineflex {
+  display: inline-flex;
+  border: solid 2px #ccc;
+  border-radius: 20px;
+}
+.total {
+  font-size: 24px;
+  font-weight: 600;
+  color: #8660e9;
+}
+.display-flex {
+  display: flex;
+}
+.align-center {
+  align-items: center;
+}
+
+input:focus {
+  outline: none;
+  box-shadow: none;
+}
+.round-black-btn {
+  border-radius: 25px;
+  background: #212529;
+  color: #fff;
+  padding: 8px 35px;
+  display: inline-block;
+  border: solid 2px #212529;
+  transition: all 0.5s ease-in-out 0s;
+  cursor: pointer;
+}
+.round-black-btn:hover,
+.round-black-btn:focus {
+  background: transparent;
+  color: #212529;
+  text-decoration: none;
+}
+.list-totals {
+  border-radius: 3px;
+  background: #e7e7e7;
+  padding: 25px;
+}
+.list-totals h3 {
+  font-size: 19px;
+  color: #3c3c3c;
+  letter-spacing: 1px;
+  font-weight: 500;
+}
+.list-totals table {
+  width: 100%;
+}
+.list-totals table tr th,
+.list-totals table tr td {
+  width: 50%;
+  padding: 3px 0;
+  vertical-align: middle;
+}
+.list-totals table tr td:last-child {
+  text-align: right;
+}
+.list-totals table tr td.subtotal {
+  font-size: 20px;
+  color: #6f6f6f;
+}
+.list-totals table tr td.free-shipping {
+  font-size: 14px;
+  color: #6f6f6f;
+}
+.list-totals table tr.total-row td {
+  padding-top: 25px;
+}
+.list-totals table tr td.price-total {
+  font-size: 24px;
+  font-weight: 600;
+  color: #8660e9;
+}
+.btn-list-totals {
+  text-align: center;
+  margin-top: 60px;
+  margin-bottom: 20px;
+}
+.btn-list-totals .round-black-btn {
+  margin: 10px 0;
+}
