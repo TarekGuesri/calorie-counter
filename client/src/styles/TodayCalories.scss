@@ -23,7 +23,7 @@
   font-weight: 400;
 }
 .table-list tr td {
-  padding: 40px 0 27px;
+  padding: 5px 0 27px;
   vertical-align: middle;
 }
 .table-list tr td:nth-child(1) {
@@ -66,9 +66,9 @@
 .table-list tr td .quanlity {
   position: relative;
 }
-.food-count .qtyminus,
-.food-count .qtyplus {
-  width: 34px;
+.food-count .qtystart,
+.food-count .qtyend {
+  width: 14px;
   height: 34px;
   background: transparent;
   text-align: center;
@@ -78,17 +78,17 @@
   cursor: pointer;
   font-weight: 600;
 }
-.food-count .qtyminus {
+.food-count .qtystart {
   line-height: 32px;
 }
-.food-count .qtyminus {
+.food-count .qtystart {
   border-radius: 3px 0 0 3px;
 }
-.food-count .qtyplus {
+.food-count .qtyend {
   border-radius: 0 3px 3px 0;
 }
 .food-count .qty {
-  width: 60px;
+  width: 95px;
   text-align: center;
   border: none;
 }
@@ -130,8 +130,9 @@ input:focus {
   text-decoration: none;
 }
 .list-totals {
-  border-radius: 3px;
-  background: #e7e7e7;
+  border-radius: 25px;
+  background: $background-primary-color;
+  box-shadow: 0 2px 4px 4px rgba($primary-color, 0.1);
   padding: 25px;
 }
 .list-totals h3 {
@@ -166,7 +167,7 @@ input:focus {
 .list-totals table tr td.price-total {
   font-size: 24px;
   font-weight: 600;
-  color: #8660e9;
+  color: $primary-color;
 }
 .btn-list-totals {
   text-align: center;

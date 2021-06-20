@@ -1,4 +1,5 @@
 import React from 'react';
+import ConsumptionListItem from './ConsumptionListItem';
 
 import 'src/styles/TodayCalories.scss';
 
@@ -20,54 +21,7 @@ const ConsumptionList = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>
-                      <div className="display-flex align-center">
-                        <div className="img-food">
-                          <img
-                            src="https://assets.bonappetit.com/photos/597f6564e85ce178131a6475/master/w_1200,c_limit/0817-murray-mancini-dried-tomato-pie.jpg"
-                            alt=""
-                            className="mCS_img_loaded"
-                          />
-                        </div>
-                        <div className="name-food">Pizza</div>
-                        <div className="price">1220</div>
-                      </div>
-                    </td>
-                    <td className="food-count">
-                      <form action="#" className="count-inlineflex">
-                        <div className="qtyminus">-</div>
-                        <input
-                          type="text"
-                          name="quantity"
-                          defaultValue={1}
-                          className="qty"
-                        />
-                        <div className="qtyplus">+</div>
-                      </form>
-                    </td>
-                    <td className="food-count">
-                      <form action="#" className="count-inlineflex">
-                        <div className="qtyminus">-</div>
-                        <input
-                          type="text"
-                          name="quantity"
-                          defaultValue={1}
-                          className="qty"
-                        />
-                        <div className="qtyplus">+</div>
-                      </form>
-                    </td>
-                    <td>
-                      <a href="#" title>
-                        <img
-                          src="images/icons/delete.png"
-                          alt=""
-                          className="mCS_img_loaded"
-                        />
-                      </a>
-                    </td>
-                  </tr>
+                  <ConsumptionListItem />
                 </tbody>
               </table>
             </div>

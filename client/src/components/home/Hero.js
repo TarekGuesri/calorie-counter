@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Hero = () => {
   return (
@@ -11,13 +12,13 @@ const Hero = () => {
             you had in day to help you know what you need in order to gain or
             lose weight.
           </p>
-          <a
+          <Link
             className="primary-button btn-lg rounded-pill mt-5 py-2 px-4"
-            href="#"
+            to="/today"
             role="button"
           >
             Get Started
-          </a>
+          </Link>
         </div>
       </div>
     </section>
