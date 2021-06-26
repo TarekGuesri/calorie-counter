@@ -20,7 +20,7 @@ router.get('/', auth, checkSelf);
 // @access Public
 router.post(
   '/register',
-  check('username', 'Username is required').not().isEmpty(),
+  check('username', 'Username is required').notEmpty(),
   check('email', 'Please include a valid email').isEmail(),
   check('password', 'Password must be at least 6 characters').isLength({
     min: 6,
