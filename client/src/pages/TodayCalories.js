@@ -10,7 +10,7 @@ const TodayCalories = () => {
       <Helmet>
         <title>{`${WEBSITE_NAME} - Today's Calories`}</title>
       </Helmet>
-      <h3> {"Today's Calories"}</h3>
+      <h3 className="primary-text"> {"Today's Calories"}</h3>
       <ConsumptionList />
     </>
   );
