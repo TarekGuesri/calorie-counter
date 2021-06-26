@@ -1,7 +1,10 @@
 import React from 'react';
-import ConsumptionListItem from './ConsumptionListItem';
 
 import 'src/styles/TodayCalories.scss';
+import ConsumptionListItem from './ConsumptionListItem';
+import dummyConsumptions from './dummyConsumptions';
+
+console.log(dummyConsumptions);
 
 const ConsumptionList = () => {
   return (
@@ -21,7 +24,12 @@ const ConsumptionList = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <ConsumptionListItem />
+                  {dummyConsumptions.map((consumption) => (
+                    <ConsumptionListItem
+                      key={consumption.id}
+                      consumption={consumption}
+                    />
+                  ))}
                 </tbody>
               </table>
             </div>

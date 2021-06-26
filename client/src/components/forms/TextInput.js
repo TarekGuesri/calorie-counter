@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const TextInput = ({ name, label, errors, ...rest }) => {
+const TextInput = ({ name, label, className, errors, ...rest }) => {
   const error = errors.find((error) => error.param === name);
   return (
     <div>
@@ -9,7 +9,7 @@ const TextInput = ({ name, label, errors, ...rest }) => {
         {label}
       </label>
       <input
-        className={`form-control${error ? ` is-invalid` : ''}`}
+        className={`form-control${error ? ` is-invalid` : ''} ${className}`}
         id={name}
         name={name}
         placeholder={label}
@@ -21,6 +21,7 @@ const TextInput = ({ name, label, errors, ...rest }) => {
 };
 
 TextInput.propTypes = {
+  className: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   errors: PropTypes.array,
