@@ -1,13 +1,22 @@
 const { validationResult } = require('express-validator');
 
-const User = require('../models/User');
-const Food = require('../models/Food');
 const ConsumptionList = require('../models/ConsumptionList');
 
 const errorLogger = require('../utils/errorLogger');
 
 exports.getConsumptionList = async (req, res) => {
-  res.json('getConsumptionList');
+  let consumptionList = await ConsumptionList.findOne({
+    user: req.user.id,
+  }).populate('consumptions.food', ['name', 'caloriesPerPortion', 'image']);
+
+  const consumptions = consumptionList.consumptions.map((consumption) => ({
+    ...consumption.food.toObject(),
+    quantity: consumption.quantity,
+    calories: consumption.food.caloriesPerPortion * consumption.quantity,
+    id: consumption.id,
+  }));
+
+  res.json(consumptions);
 };
 
 exports.updateConsumptionList = async (req, res) => {
