@@ -1,12 +1,34 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import 'src/styles/TodayCalories.scss';
+import {
+  getConsumptionList,
+  updateConsumptionQuantity,
+  updateConsumptionCalories,
+} from 'src/actions/consumptionList';
+import Spinner from 'src/components/layout/Spinner';
 import ConsumptionListItem from './ConsumptionListItem';
-import dummyConsumptions from './dummyConsumptions';
 
-console.log(dummyConsumptions);
-
-const ConsumptionList = () => {
+const ConsumptionList = ({
+  consumptionList,
+  loading,
+  saved,
+  getConsumptionList,
+  updateConsumptionQuantity,
+  updateConsumptionCalories,
+}) => {
+  useEffect(() => {
+    getConsumptionList();
+  }, []);
+  if (loading) {
+    return (
+      <div className="text-success mt-5">
+        <Spinner />
+      </div>
+    );
+  }
   return (
     <div className="list-wrap">
       <div className="container">
@@ -24,10 +46,12 @@ const ConsumptionList = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {dummyConsumptions.map((consumption) => (
+                  {consumptionList.map((consumption) => (
                     <ConsumptionListItem
                       key={consumption.id}
                       consumption={consumption}
+                      updateConsumptionQuantity={updateConsumptionQuantity}
+                      updateConsumptionCalories={updateConsumptionCalories}
                     />
                   ))}
                 </tbody>
@@ -65,7 +89,7 @@ const ConsumptionList = () => {
                   </tbody>
                 </table>
                 <div className="btn-list-totals">
-                  <a href="#" className="update round-black-btn" title>
+                  <a href="#" className="update round-black-btn">
                     Clear list
                   </a>
                 </div>
@@ -82,4 +106,23 @@ const ConsumptionList = () => {
   );
 };
 
-export default ConsumptionList;
+const mapStateToProps = (state) => ({
+  consumptionList: state.consumptionList.consumptionList,
+  loading: state.consumptionList.loading,
+  saved: state.consumptionList.saved,
+});
+
+ConsumptionList.propTypes = {
+  consumptionList: PropTypes.array.isRequired,
+  loading: PropTypes.bool.isRequired,
+  saved: PropTypes.bool.isRequired,
+  getConsumptionList: PropTypes.func.isRequired,
+  updateConsumptionQuantity: PropTypes.func.isRequired,
+  updateConsumptionCalories: PropTypes.func.isRequired,
+};
+
+export default connect(mapStateToProps, {
+  getConsumptionList,
+  updateConsumptionQuantity,
+  updateConsumptionCalories,
+})(ConsumptionList);

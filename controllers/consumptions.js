@@ -25,21 +25,26 @@ exports.updateConsumptionList = async (req, res) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  let consumptionList = await ConsumptionList.findOne({ user: req.user.id });
+  try {
+    let consumptionList = await ConsumptionList.findOne({ user: req.user.id });
 
-  // We check if the user has a consumption list, if not, we create it
-  if (!consumptionList) {
-    consumptionList = new ConsumptionList({
-      user: req.user.id,
-    });
+    // We check if the user has a consumption list, if not, we create it
+    if (!consumptionList) {
+      consumptionList = new ConsumptionList({
+        user: req.user.id,
+      });
+    }
+
+    // TODO : add an array schema validation
+    const { consumptions } = req.body;
+
+    consumptionList.consumptions = consumptions;
+
+    await consumptionList.save();
+
+    res.json('Consumption List has been updated');
+  } catch (error) {
+    errorLogger(req, 1, error);
+    res.status(500).send('Server error');
   }
-
-  // TODO : add an array schema validation
-  const { consumptions } = req.body;
-
-  consumptionList.consumptions = consumptions;
-
-  await consumptionList.save();
-
-  res.json('Consumption List has been updated');
 };

@@ -1,29 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import TextInput from 'src/components/forms/TextInput';
 
 const ConsumptionListItem = ({
-  consumption: { name, caloriesPerPortion, image },
+  consumption: { id, name, caloriesPerPortion, image, quantity, calories },
+  updateConsumptionCalories,
+  updateConsumptionQuantity,
 }) => {
-  const [state, setState] = useState({
-    quantity: 0,
-    calories: 0,
-  });
-
-  useEffect(() => {
-    setState({ ...state, quantity });
-  }, []);
-
-  const handleOnChange = async (e) => {
-    setState({
-      ...state,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const { quantity, calories } = state;
-
   return (
     <tr>
       <td>
@@ -50,7 +34,7 @@ const ConsumptionListItem = ({
           label="Quantity"
           type="number"
           min={0}
-          onChange={handleOnChange}
+          onChange={(e) => updateConsumptionQuantity(id, e.target.value)}
           required
           style={{ width: '130px' }}
         />
@@ -63,14 +47,14 @@ const ConsumptionListItem = ({
           label="Calories"
           type="number"
           min={0}
-          onChange={handleOnChange}
+          onChange={(e) => updateConsumptionCalories(id, e.target.value)}
           required
           style={{ width: '130px' }}
         />
       </td>
 
       <td>
-        <a href="#" title>
+        <a href="#">
           <img
             src="images/icons/delete.png"
             alt=""
@@ -84,6 +68,8 @@ const ConsumptionListItem = ({
 
 ConsumptionListItem.propTypes = {
   consumption: PropTypes.object.isRequired,
+  updateConsumptionQuantity: PropTypes.func.isRequired,
+  updateConsumptionCalories: PropTypes.func.isRequired,
 };
 
 export default ConsumptionListItem;
