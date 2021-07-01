@@ -28,8 +28,9 @@ export default function (state = initialState, action) {
 
       consumptionList[index].quantity = payload.quantity;
 
-      consumptionList[index].calories =
-        payload.quantity * consumptionList[index].caloriesPerPortion;
+      consumptionList[index].calories = Math.round(
+        payload.quantity * consumptionList[index].caloriesPerPortion
+      );
       return {
         ...state,
         consumptionList: [...consumptionList],
