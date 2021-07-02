@@ -2,6 +2,7 @@ import {
   GET_CONSUMPTION_LIST,
   UPDATE_CONSUMPTION_QUANTITY,
   UPDATE_CONSUMPTION_CALORIES,
+  DELETE_CONSUMPTION,
 } from '../actions/types';
 
 const initialState = {
@@ -50,6 +51,16 @@ export default function (state = initialState, action) {
       return {
         ...state,
         consumptionList: [...consumptionList],
+      };
+    }
+    case DELETE_CONSUMPTION: {
+      return {
+        ...state,
+        consumptionList: [
+          ...state.consumptionList.filter(
+            (consumption) => consumption.id !== payload.id
+          ),
+        ],
       };
     }
     default:

@@ -7,6 +7,7 @@ import {
   getConsumptionList,
   updateConsumptionQuantity,
   updateConsumptionCalories,
+  deleteConsumptionCalories,
 } from 'src/actions/consumptionList';
 import Spinner from 'src/components/layout/Spinner';
 import ConsumptionListItem from './ConsumptionListItem';
@@ -18,6 +19,7 @@ const ConsumptionList = ({
   getConsumptionList,
   updateConsumptionQuantity,
   updateConsumptionCalories,
+  deleteConsumptionCalories,
 }) => {
   useEffect(() => {
     getConsumptionList();
@@ -52,6 +54,7 @@ const ConsumptionList = ({
                       consumption={consumption}
                       updateConsumptionQuantity={updateConsumptionQuantity}
                       updateConsumptionCalories={updateConsumptionCalories}
+                      deleteConsumptionCalories={deleteConsumptionCalories}
                     />
                   ))}
                 </tbody>
@@ -119,10 +122,12 @@ ConsumptionList.propTypes = {
   getConsumptionList: PropTypes.func.isRequired,
   updateConsumptionQuantity: PropTypes.func.isRequired,
   updateConsumptionCalories: PropTypes.func.isRequired,
+  deleteConsumptionCalories: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, {
   getConsumptionList,
   updateConsumptionQuantity,
   updateConsumptionCalories,
+  deleteConsumptionCalories,
 })(ConsumptionList);

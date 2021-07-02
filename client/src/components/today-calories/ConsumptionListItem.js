@@ -7,6 +7,7 @@ const ConsumptionListItem = ({
   consumption: { id, name, caloriesPerPortion, image, quantity, calories },
   updateConsumptionCalories,
   updateConsumptionQuantity,
+  deleteConsumptionCalories,
 }) => {
   return (
     <tr>
@@ -54,12 +55,12 @@ const ConsumptionListItem = ({
       </td>
 
       <td>
-        <a href="#">
-          <img
-            src="images/icons/delete.png"
-            alt=""
-            className="mCS_img_loaded"
-          />
+        <a
+          href="#"
+          className="text-danger"
+          onClick={() => deleteConsumptionCalories(id)}
+        >
+          <i className="fas fa-trash-alt"></i>
         </a>
       </td>
     </tr>
@@ -70,6 +71,7 @@ ConsumptionListItem.propTypes = {
   consumption: PropTypes.object.isRequired,
   updateConsumptionQuantity: PropTypes.func.isRequired,
   updateConsumptionCalories: PropTypes.func.isRequired,
+  deleteConsumptionCalories: PropTypes.func.isRequired,
 };
 
 export default ConsumptionListItem;
