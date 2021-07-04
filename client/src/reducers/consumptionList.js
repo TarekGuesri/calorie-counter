@@ -3,12 +3,15 @@ import {
   UPDATE_CONSUMPTION_QUANTITY,
   UPDATE_CONSUMPTION_CALORIES,
   DELETE_CONSUMPTION,
+  CLEAR_CONSUMPTIONS,
+  SAVE_CONSUMPTION_LIST,
 } from '../actions/types';
 
 const initialState = {
   consumptionList: [],
   loading: true,
   saved: true,
+  saving: false,
 };
 
 export default function (state = initialState, action) {
@@ -35,6 +38,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         consumptionList: [...consumptionList],
+        saved: false,
       };
     }
     case UPDATE_CONSUMPTION_CALORIES: {
@@ -51,6 +55,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         consumptionList: [...consumptionList],
+        saved: false,
       };
     }
     case DELETE_CONSUMPTION: {
@@ -61,6 +66,20 @@ export default function (state = initialState, action) {
             (consumption) => consumption.id !== payload.id
           ),
         ],
+        saved: false,
+      };
+    }
+    case CLEAR_CONSUMPTIONS: {
+      return {
+        ...state,
+        consumptionList: [],
+        saved: false,
+      };
+    }
+    case SAVE_CONSUMPTION_LIST: {
+      return {
+        ...state,
+        saved: true,
       };
     }
     default:

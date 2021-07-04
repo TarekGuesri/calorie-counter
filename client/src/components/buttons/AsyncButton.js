@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 import Spinner from 'src/components/layout/Spinner';
 
-const AsyncButton = ({ text, loading, ...rest }) => {
+const AsyncButton = ({ text, loading, disabled, ...rest }) => {
   return (
-    <button disabled={loading} {...rest}>
+    <button disabled={loading || disabled} {...rest}>
       {loading ? <Spinner /> : text}
     </button>
   );
@@ -14,6 +14,7 @@ const AsyncButton = ({ text, loading, ...rest }) => {
 AsyncButton.propTypes = {
   text: PropTypes.string.isRequired,
   loading: PropTypes.bool.isRequired,
+  disabled: PropTypes.bool,
 };
 
 export default AsyncButton;

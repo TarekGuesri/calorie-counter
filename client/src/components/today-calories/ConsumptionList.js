@@ -8,6 +8,8 @@ import {
   updateConsumptionQuantity,
   updateConsumptionCalories,
   deleteConsumptionCalories,
+  clearConsumptionList,
+  saveConsumptionList,
 } from 'src/actions/consumptionList';
 import Spinner from 'src/components/layout/Spinner';
 import ConsumptionListItem from './ConsumptionListItem';
@@ -17,10 +19,13 @@ const ConsumptionList = ({
   consumptionList,
   loading,
   saved,
+  saving,
   getConsumptionList,
   updateConsumptionQuantity,
   updateConsumptionCalories,
   deleteConsumptionCalories,
+  clearConsumptionList,
+  saveConsumptionList,
 }) => {
   useEffect(() => {
     getConsumptionList();
@@ -65,7 +70,13 @@ const ConsumptionList = ({
           </div>
           {/* /.col-lg-8 */}
           <div className="col-lg-4">
-            <ConsumptionInfo saved={saved} />
+            <ConsumptionInfo
+              consumptionList={consumptionList}
+              saved={saved}
+              saving={saving}
+              saveConsumptionList={saveConsumptionList}
+              clearConsumptionList={clearConsumptionList}
+            />
           </div>
           {/* /.col-lg-4 */}
         </div>
@@ -78,16 +89,20 @@ const mapStateToProps = (state) => ({
   consumptionList: state.consumptionList.consumptionList,
   loading: state.consumptionList.loading,
   saved: state.consumptionList.saved,
+  saving: state.consumptionList.saving,
 });
 
 ConsumptionList.propTypes = {
   consumptionList: PropTypes.array.isRequired,
   loading: PropTypes.bool.isRequired,
   saved: PropTypes.bool.isRequired,
+  saving: PropTypes.bool.isRequired,
   getConsumptionList: PropTypes.func.isRequired,
   updateConsumptionQuantity: PropTypes.func.isRequired,
   updateConsumptionCalories: PropTypes.func.isRequired,
   deleteConsumptionCalories: PropTypes.func.isRequired,
+  clearConsumptionList: PropTypes.func.isRequired,
+  saveConsumptionList: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, {
@@ -95,4 +110,6 @@ export default connect(mapStateToProps, {
   updateConsumptionQuantity,
   updateConsumptionCalories,
   deleteConsumptionCalories,
+  clearConsumptionList,
+  saveConsumptionList,
 })(ConsumptionList);

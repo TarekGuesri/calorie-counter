@@ -1,8 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import AsyncButton from 'src/components/buttons/AsyncButton';
 
-const ConsumptionInfo = () => {
+const ConsumptionInfo = ({
+  consumptionList,
+  saved,
+  saving,
+  saveConsumptionList,
+  clearConsumptionList,
+}) => {
   return (
     <div className="list-totals">
       <h3>Calories needed to</h3>
@@ -33,7 +40,12 @@ const ConsumptionInfo = () => {
         </table>
 
         <div className="row">
-          <a className="danger-button  btn-lg rounded-pill mt-4" role="button">
+          <a
+            className="danger-button  btn-lg rounded-pill mt-4"
+            role="button"
+            disabled={consumptionList.length <= 0}
+            onClick={clearConsumptionList}
+          >
             Clear
           </a>
 
@@ -41,7 +53,9 @@ const ConsumptionInfo = () => {
             type="submit"
             text="Save"
             className="primary-button btn-lg rounded-pill mt-4"
-            loading={false}
+            loading={saving}
+            disabled={saved}
+            onClick={() => saveConsumptionList(consumptionList)}
           />
         </div>
 
@@ -50,6 +64,14 @@ const ConsumptionInfo = () => {
       {/* /form */}
     </div>
   );
+};
+
+ConsumptionInfo.propTypes = {
+  consumptionList: PropTypes.array.isRequired,
+  saved: PropTypes.bool.isRequired,
+  saving: PropTypes.bool.isRequired,
+  clearConsumptionList: PropTypes.func.isRequired,
+  saveConsumptionList: PropTypes.func.isRequired,
 };
 
 export default ConsumptionInfo;

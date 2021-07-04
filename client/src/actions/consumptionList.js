@@ -5,6 +5,8 @@ import {
   UPDATE_CONSUMPTION_CALORIES,
   UPDATE_CONSUMPTION_QUANTITY,
   DELETE_CONSUMPTION,
+  CLEAR_CONSUMPTIONS,
+  SAVE_CONSUMPTION_LIST,
 } from './types';
 
 // Get Consumption List
@@ -17,7 +19,7 @@ export const getConsumptionList = () => async (dispatch) => {
 };
 
 // Update Consumption Quantity
-export const updateConsumptionQuantity = (id, quantity) => async (dispatch) => {
+export const updateConsumptionQuantity = (id, quantity) => (dispatch) => {
   dispatch({
     type: UPDATE_CONSUMPTION_QUANTITY,
     payload: { id, quantity },
@@ -25,7 +27,7 @@ export const updateConsumptionQuantity = (id, quantity) => async (dispatch) => {
 };
 
 // Update Consumption Calories
-export const updateConsumptionCalories = (id, calories) => async (dispatch) => {
+export const updateConsumptionCalories = (id, calories) => (dispatch) => {
   dispatch({
     type: UPDATE_CONSUMPTION_CALORIES,
     payload: { id, calories },
@@ -33,9 +35,31 @@ export const updateConsumptionCalories = (id, calories) => async (dispatch) => {
 };
 
 // Delete Consumption
-export const deleteConsumptionCalories = (id) => async (dispatch) => {
+export const deleteConsumptionCalories = (id) => (dispatch) => {
   dispatch({
     type: DELETE_CONSUMPTION,
     payload: { id },
+  });
+};
+
+// Save Consumption
+export const saveConsumptionList = (consumptionList) => async (dispatch) => {
+  // Mapping the consumptions for the backend
+  const consumptions = consumptionList.map((consumption) => ({
+    food: consumption._id,
+    quantity: consumption.quantity,
+  }));
+
+  await axios.put('consumptions/list', { consumptions });
+
+  dispatch({
+    type: SAVE_CONSUMPTION_LIST,
+  });
+};
+
+// Save Consumption
+export const clearConsumptionList = () => (dispatch) => {
+  dispatch({
+    type: CLEAR_CONSUMPTIONS,
   });
 };
