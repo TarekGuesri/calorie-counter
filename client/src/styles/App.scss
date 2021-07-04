@@ -128,6 +128,18 @@ button {
   background: rgba($primary-color, 0.6) !important;
 }
 
+.danger-button {
+  color: #fff !important;
+  padding: 6px 20px 6px 20px;
+  background: $first-accent-color;
+  box-shadow: 0px 5px 15px #dce1ff;
+  border-radius: 4px;
+  border-style: none;
+}
+.danger-button[disabled] {
+  background: rgba($first-accent-color, 0.6) !important;
+}
+
 .btn-circle {
   width: 40px;
   height: 40px;

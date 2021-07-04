@@ -113,22 +113,7 @@ input:focus {
   outline: none;
   box-shadow: none;
 }
-.round-black-btn {
-  border-radius: 25px;
-  background: #212529;
-  color: #fff;
-  padding: 8px 35px;
-  display: inline-block;
-  border: solid 2px #212529;
-  transition: all 0.5s ease-in-out 0s;
-  cursor: pointer;
-}
-.round-black-btn:hover,
-.round-black-btn:focus {
-  background: transparent;
-  color: #212529;
-  text-decoration: none;
-}
+
 .list-totals {
   border-radius: 25px;
   background: $background-primary-color;
@@ -173,7 +158,4 @@ input:focus {
   text-align: center;
   margin-top: 60px;
   margin-bottom: 20px;
-}
-.btn-list-totals .round-black-btn {
-  margin: 10px 0;
 }

@@ -11,6 +11,7 @@ import {
 } from 'src/actions/consumptionList';
 import Spinner from 'src/components/layout/Spinner';
 import ConsumptionListItem from './ConsumptionListItem';
+import ConsumptionInfo from './ConsumptionInfo';
 
 const ConsumptionList = ({
   consumptionList,
@@ -64,43 +65,7 @@ const ConsumptionList = ({
           </div>
           {/* /.col-lg-8 */}
           <div className="col-lg-4">
-            <div className="list-totals">
-              <h3>Calories needed to</h3>
-              <form action="#" method="get" acceptCharset="utf-8">
-                <table>
-                  <tbody>
-                    <tr>
-                      <td>0.5 kg/week loss</td>
-                      <td className="subtotal">2500</td>
-                    </tr>
-                    <tr>
-                      <td>1 kg/week loss</td>
-                      <td className="subtotal">2500</td>
-                    </tr>
-                    <tr className="border-top border-secondary">
-                      <td>0.5 kg/week gain</td>
-                      <td className="subtotal">2500</td>
-                    </tr>
-                    <tr>
-                      <td>1 kg/week gain</td>
-                      <td className="subtotal">2500</td>
-                    </tr>
-                    <tr className="total-row border-top border-secondary">
-                      <td>{"Today's calories"}</td>
-                      <td className="price-total">2500</td>
-                    </tr>
-                  </tbody>
-                </table>
-                <div className="btn-list-totals">
-                  <a href="#" className="update round-black-btn">
-                    Clear list
-                  </a>
-                </div>
-                {/* /.btn-list-totals */}
-              </form>
-              {/* /form */}
-            </div>
-            {/* /.list-totals */}
+            <ConsumptionInfo saved={saved} />
           </div>
           {/* /.col-lg-4 */}
         </div>
