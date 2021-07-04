@@ -18,7 +18,7 @@ import ConsumptionInfo from './ConsumptionInfo';
 const ConsumptionList = ({
   consumptionList,
   loading,
-  saved,
+  saved, // TODO : Add a modal to confirm saving when leaving the page without saving
   saving,
   getConsumptionList,
   updateConsumptionQuantity,
@@ -40,6 +40,7 @@ const ConsumptionList = ({
   return (
     <div className="list-wrap">
       <div className="container">
+        {/* TODO :  Add an input that adds food to the list */}
         <div className="row">
           <div className="col-lg-8">
             <div className="main-heading">Consumption List</div>
