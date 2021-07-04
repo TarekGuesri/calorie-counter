@@ -37,7 +37,7 @@ const ConsumptionList = ({
         <div className="row">
           <div className="col-lg-8">
             <div className="main-heading">Consumption List</div>
-            <div className="table-list">
+            <div className="table-list table-responsive">
               <table>
                 <thead>
                   <tr>

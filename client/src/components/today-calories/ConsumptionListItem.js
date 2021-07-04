@@ -27,7 +27,7 @@ const ConsumptionListItem = ({
           <div className="price">{caloriesPerPortion}</div>
         </div>
       </td>
-      <td className="food-count">
+      <td className="food-count px-2 px-md-0">
         <TextInput
           className="mx-auto"
           name="quantity"
@@ -40,7 +40,7 @@ const ConsumptionListItem = ({
           style={{ width: '130px' }}
         />
       </td>
-      <td className="food-count">
+      <td className="food-count px-2 px-md-0">
         <TextInput
           className="mx-auto"
           name="calories"
@@ -54,7 +54,7 @@ const ConsumptionListItem = ({
         />
       </td>
 
-      <td>
+      <td className="ps-3 ps-md-0">
         <a
           href="#"
           className="text-danger"
