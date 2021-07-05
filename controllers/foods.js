@@ -2,10 +2,24 @@ const { validationResult } = require('express-validator');
 
 const User = require('../models/User');
 const Food = require('../models/Food');
+const ConsumptionList = require('../models/ConsumptionList');
 const errorLogger = require('../utils/errorLogger');
 
 exports.getFoods = async (req, res) => {
   res.json('getFoods');
+};
+
+exports.getAvailableFoods = async (req, res) => {
+  // First we get the foods listed in the consumption list
+  const consumptionList = await ConsumptionList.findOne({ user: req.user.id });
+
+  const usedFoods = consumptionList.consumptions.map(
+    (consumption) => consumption.food
+  );
+  console.log(usedFoods);
+  const availableFoods = await Food.find({ _id: { $nin: usedFoods } });
+
+  return res.json(availableFoods);
 };
 
 exports.addFood = async (req, res) => {

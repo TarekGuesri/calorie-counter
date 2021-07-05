@@ -2,7 +2,11 @@ const express = require('express');
 const { check } = require('express-validator');
 
 const auth = require('../../middleware/auth');
-const { getFoods, addFood } = require('../../controllers/foods');
+const {
+  getFoods,
+  addFood,
+  getAvailableFoods,
+} = require('../../controllers/foods');
 
 const router = express.Router();
 
@@ -24,5 +28,10 @@ router.post(
   check('user', 'User is required').notEmpty(),
   addFood
 );
+
+// @route GET foods/available
+// @desc Gets available foods for the list (ones that are not in the user's calories list)
+// @access Private
+router.get('/available', auth, getAvailableFoods);
 
 module.exports = router;
