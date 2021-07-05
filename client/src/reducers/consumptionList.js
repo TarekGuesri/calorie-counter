@@ -1,7 +1,9 @@
+import { v4 as uuidv4 } from 'uuid';
 import {
   GET_CONSUMPTION_LIST,
   UPDATE_CONSUMPTION_QUANTITY,
   UPDATE_CONSUMPTION_CALORIES,
+  ADD_CONSUMPTION,
   DELETE_CONSUMPTION,
   CLEAR_CONSUMPTIONS,
   SAVE_CONSUMPTION_LIST,
@@ -9,6 +11,7 @@ import {
 
 const initialState = {
   consumptionList: [],
+  totalCalories: 0,
   loading: true,
   saved: true,
   saving: false,
@@ -18,11 +21,34 @@ export default function (state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
-    case GET_CONSUMPTION_LIST:
+    case GET_CONSUMPTION_LIST: {
+      // Getting total calories+
+      let totalCalories = 0;
+      payload.forEach((food) => {
+        totalCalories += food.calories;
+        return;
+      });
       return {
         ...state,
         consumptionList: payload,
         loading: false,
+        totalCalories,
+      };
+    }
+    case ADD_CONSUMPTION:
+      return {
+        ...state,
+        consumptionList: [
+          {
+            ...payload,
+            id: uuidv4(),
+            quantity: 1,
+            calories: payload.caloriesPerPortion,
+          },
+          ...state.consumptionList,
+        ],
+        totalCalories: state.totalCalories + payload.caloriesPerPortion,
+        saved: false,
       };
     case UPDATE_CONSUMPTION_QUANTITY: {
       let consumptionList = state.consumptionList;

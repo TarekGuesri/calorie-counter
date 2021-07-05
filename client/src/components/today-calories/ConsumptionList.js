@@ -7,7 +7,8 @@ import {
   getConsumptionList,
   updateConsumptionQuantity,
   updateConsumptionCalories,
-  deleteConsumptionCalories,
+  addConsumption,
+  deleteConsumption,
   clearConsumptionList,
   saveConsumptionList,
 } from 'src/actions/consumptionList';
@@ -18,13 +19,15 @@ import AddConsumption from './AddConsumption';
 
 const ConsumptionList = ({
   consumptionList,
+  totalCalories,
   loading,
   saved, // TODO : Add a modal to confirm saving when leaving the page without saving
   saving,
   getConsumptionList,
   updateConsumptionQuantity,
   updateConsumptionCalories,
-  deleteConsumptionCalories,
+  addConsumption,
+  deleteConsumption,
   clearConsumptionList,
   saveConsumptionList,
 }) => {
@@ -41,7 +44,7 @@ const ConsumptionList = ({
   return (
     <div className="list-wrap">
       <div className="container">
-        <AddConsumption />
+        <AddConsumption addConsumption={addConsumption} />
         <div className="row">
           <div className="col-lg-8">
             <div className="main-heading">Consumption List</div>
@@ -62,7 +65,7 @@ const ConsumptionList = ({
                       consumption={consumption}
                       updateConsumptionQuantity={updateConsumptionQuantity}
                       updateConsumptionCalories={updateConsumptionCalories}
-                      deleteConsumptionCalories={deleteConsumptionCalories}
+                      deleteConsumption={deleteConsumption}
                     />
                   ))}
                 </tbody>
@@ -74,6 +77,7 @@ const ConsumptionList = ({
           <div className="col-lg-4">
             <ConsumptionInfo
               consumptionList={consumptionList}
+              totalCalories={totalCalories}
               saved={saved}
               saving={saving}
               saveConsumptionList={saveConsumptionList}
@@ -89,6 +93,7 @@ const ConsumptionList = ({
 
 const mapStateToProps = (state) => ({
   consumptionList: state.consumptionList.consumptionList,
+  totalCalories: state.consumptionList.totalCalories,
   loading: state.consumptionList.loading,
   saved: state.consumptionList.saved,
   saving: state.consumptionList.saving,
@@ -96,13 +101,15 @@ const mapStateToProps = (state) => ({
 
 ConsumptionList.propTypes = {
   consumptionList: PropTypes.array.isRequired,
+  totalCalories: PropTypes.number.isRequired,
   loading: PropTypes.bool.isRequired,
   saved: PropTypes.bool.isRequired,
   saving: PropTypes.bool.isRequired,
   getConsumptionList: PropTypes.func.isRequired,
   updateConsumptionQuantity: PropTypes.func.isRequired,
   updateConsumptionCalories: PropTypes.func.isRequired,
-  deleteConsumptionCalories: PropTypes.func.isRequired,
+  addConsumption: PropTypes.func.isRequired,
+  deleteConsumption: PropTypes.func.isRequired,
   clearConsumptionList: PropTypes.func.isRequired,
   saveConsumptionList: PropTypes.func.isRequired,
 };
@@ -111,7 +118,8 @@ export default connect(mapStateToProps, {
   getConsumptionList,
   updateConsumptionQuantity,
   updateConsumptionCalories,
-  deleteConsumptionCalories,
+  addConsumption,
+  deleteConsumption,
   clearConsumptionList,
   saveConsumptionList,
 })(ConsumptionList);

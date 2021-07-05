@@ -5,6 +5,7 @@ import AsyncButton from 'src/components/buttons/AsyncButton';
 
 const ConsumptionInfo = ({
   consumptionList,
+  totalCalories,
   saved,
   saving,
   saveConsumptionList,
@@ -34,7 +35,7 @@ const ConsumptionInfo = ({
             </tr>
             <tr className="total-row border-top border-secondary">
               <td>{"Today's calories"}</td>
-              <td className="price-total">2500</td>
+              <td className="price-total">{totalCalories}</td>
             </tr>
           </tbody>
         </table>
@@ -68,6 +69,7 @@ const ConsumptionInfo = ({
 
 ConsumptionInfo.propTypes = {
   consumptionList: PropTypes.array.isRequired,
+  totalCalories: PropTypes.number.isRequired,
   saved: PropTypes.bool.isRequired,
   saving: PropTypes.bool.isRequired,
   clearConsumptionList: PropTypes.func.isRequired,

@@ -7,7 +7,7 @@ const ConsumptionListItem = ({
   consumption: { id, name, caloriesPerPortion, image, quantity, calories },
   updateConsumptionCalories,
   updateConsumptionQuantity,
-  deleteConsumptionCalories,
+  deleteConsumption,
 }) => {
   return (
     <tr>
@@ -58,7 +58,7 @@ const ConsumptionListItem = ({
         <a
           href="#"
           className="text-danger"
-          onClick={() => deleteConsumptionCalories(id)}
+          onClick={() => deleteConsumption(id)}
         >
           <i className="fas fa-trash-alt"></i>
         </a>
@@ -71,7 +71,7 @@ ConsumptionListItem.propTypes = {
   consumption: PropTypes.object.isRequired,
   updateConsumptionQuantity: PropTypes.func.isRequired,
   updateConsumptionCalories: PropTypes.func.isRequired,
-  deleteConsumptionCalories: PropTypes.func.isRequired,
+  deleteConsumption: PropTypes.func.isRequired,
 };
 
 export default ConsumptionListItem;

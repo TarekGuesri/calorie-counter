@@ -4,6 +4,7 @@ import {
   GET_CONSUMPTION_LIST,
   UPDATE_CONSUMPTION_CALORIES,
   UPDATE_CONSUMPTION_QUANTITY,
+  ADD_CONSUMPTION,
   DELETE_CONSUMPTION,
   CLEAR_CONSUMPTIONS,
   SAVE_CONSUMPTION_LIST,
@@ -34,8 +35,16 @@ export const updateConsumptionCalories = (id, calories) => (dispatch) => {
   });
 };
 
+// Add Consumption
+export const addConsumption = (food) => (dispatch) => {
+  dispatch({
+    type: ADD_CONSUMPTION,
+    payload: food,
+  });
+};
+
 // Delete Consumption
-export const deleteConsumptionCalories = (id) => (dispatch) => {
+export const deleteConsumption = (id) => (dispatch) => {
   dispatch({
     type: DELETE_CONSUMPTION,
     payload: { id },

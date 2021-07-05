@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 import ReactAutocomplete from 'react-autocomplete';
 
-const AddConsumption = () => {
+const AddConsumption = ({ addConsumption }) => {
   const [state, setState] = useState({
     foods: [],
     loading: true,
@@ -14,11 +15,7 @@ const AddConsumption = () => {
       const res = await axios.get('foods/available');
       setState({
         ...state,
-        // We map the foods for the select dropdown
-        foods: res.data.map((food) => ({
-          id: food._id,
-          value: `${food.name} (${food.caloriesPerPortion} c)`,
-        })),
+        foods: res.data,
         loading: false,
         food: { id: '', value: '' },
       });
@@ -26,8 +23,18 @@ const AddConsumption = () => {
     fetchData();
   }, []);
 
-  const onSelect = (value, item) => {
+  const handleOnSelect = (value, item) => {
     setState({ ...state, food: item });
+  };
+
+  const handleAddToList = () => {
+    const { food, foods } = state;
+    const selectedFood = foods.find(
+      (selectedFood) => selectedFood._id === food.id
+    );
+
+    // Adding the food the consumption list
+    addConsumption(selectedFood);
   };
 
   const { foods, loading, food } = state;
@@ -39,7 +46,13 @@ const AddConsumption = () => {
       <br />
       <ReactAutocomplete
         className="awdaw"
-        items={foods}
+        items={
+          // We map the foods for ReactAutocomplete
+          foods.map((food) => ({
+            id: food._id,
+            value: `${food.name} (${food.caloriesPerPortion} c)`,
+          }))
+        }
         shouldItemRender={(item, value) =>
           item.value.toLowerCase().indexOf(value.toLowerCase()) > -1
         }
@@ -68,17 +81,22 @@ const AddConsumption = () => {
         onChange={(e) =>
           setState({ ...state, food: { value: e.target.value, id: '' } })
         }
-        onSelect={onSelect}
+        onSelect={handleOnSelect}
       />
       <a
         className="primary-button  btn-lg rounded-pill mt-4 ms-0 ms-sm-4"
         role="button"
         disabled={!food.id}
+        onClick={handleAddToList}
       >
         Add
       </a>
     </div>
   );
+};
+
+AddConsumption.propTypes = {
+  addConsumption: PropTypes.func.isRequired,
 };
 
 export default AddConsumption;
