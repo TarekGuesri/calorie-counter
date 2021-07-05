@@ -14,6 +14,7 @@ import {
 import Spinner from 'src/components/layout/Spinner';
 import ConsumptionListItem from './ConsumptionListItem';
 import ConsumptionInfo from './ConsumptionInfo';
+import AddConsumption from './AddConsumption';
 
 const ConsumptionList = ({
   consumptionList,
@@ -40,7 +41,7 @@ const ConsumptionList = ({
   return (
     <div className="list-wrap">
       <div className="container">
-        {/* TODO :  Add an input that adds food to the list */}
+        <AddConsumption />
         <div className="row">
           <div className="col-lg-8">
             <div className="main-heading">Consumption List</div>
