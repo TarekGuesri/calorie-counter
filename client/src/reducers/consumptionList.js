@@ -22,17 +22,11 @@ export default function (state = initialState, action) {
 
   switch (type) {
     case GET_CONSUMPTION_LIST: {
-      // Getting total calories+
-      let totalCalories = 0;
-      payload.forEach((food) => {
-        totalCalories += food.calories;
-        return;
-      });
       return {
         ...state,
         consumptionList: payload,
         loading: false,
-        totalCalories,
+        totalCalories: getTotalCalories(payload),
       };
     }
     case ADD_CONSUMPTION:
@@ -64,6 +58,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         consumptionList: [...consumptionList],
+        totalCalories: getTotalCalories(consumptionList),
         saved: false,
       };
     }
@@ -81,10 +76,14 @@ export default function (state = initialState, action) {
       return {
         ...state,
         consumptionList: [...consumptionList],
+        totalCalories: getTotalCalories(consumptionList),
         saved: false,
       };
     }
     case DELETE_CONSUMPTION: {
+      const deletedConsumption = state.consumptionList.find(
+        (consumption) => consumption.id === payload.id
+      );
       return {
         ...state,
         consumptionList: [
@@ -92,6 +91,7 @@ export default function (state = initialState, action) {
             (consumption) => consumption.id !== payload.id
           ),
         ],
+        totalCalories: state.totalCalories - deletedConsumption.calories,
         saved: false,
       };
     }
@@ -99,6 +99,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         consumptionList: [],
+        totalCalories: 0,
         saved: false,
       };
     }
@@ -112,3 +113,12 @@ export default function (state = initialState, action) {
       return state;
   }
 }
+
+const getTotalCalories = (consumptionList) => {
+  let totalCalories = 0;
+  consumptionList.forEach((consumption) => {
+    totalCalories += Number(consumption.calories);
+    return;
+  });
+  return totalCalories;
+};

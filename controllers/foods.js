@@ -10,14 +10,7 @@ exports.getFoods = async (req, res) => {
 };
 
 exports.getAvailableFoods = async (req, res) => {
-  // First we get the foods listed in the consumption list
-  const consumptionList = await ConsumptionList.findOne({ user: req.user.id });
-
-  const usedFoods = consumptionList.consumptions.map(
-    (consumption) => consumption.food
-  );
-  console.log(usedFoods);
-  const availableFoods = await Food.find({ _id: { $nin: usedFoods } });
+  const availableFoods = await Food.find({ user: req.user.id });
 
   return res.json(availableFoods);
 };

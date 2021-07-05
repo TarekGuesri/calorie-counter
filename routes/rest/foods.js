@@ -30,7 +30,7 @@ router.post(
 );
 
 // @route GET foods/available
-// @desc Gets available foods for the list (ones that are not in the user's calories list)
+// @desc Gets available foods for the list (foods that belong to the user)
 // @access Private
 router.get('/available', auth, getAvailableFoods);
 
