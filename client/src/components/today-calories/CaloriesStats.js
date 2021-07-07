@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const profile = false;
 const CaloriesStats = ({ totalCalories }) => {
@@ -37,7 +38,7 @@ const CaloriesStats = ({ totalCalories }) => {
               <td className="text-center pb-3" colSpan="2">
                 In order to get the estimation of the number of calories you
                 need to consume, you need to complete your profile{' '}
-                <a href="/profile">here</a>
+                <Link to="/profile">here</Link>
               </td>
             </tr>
           )}
