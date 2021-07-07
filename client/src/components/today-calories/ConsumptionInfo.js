@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import AsyncButton from 'src/components/buttons/AsyncButton';
+import CaloriesStats from './CaloriesStats';
 
 const ConsumptionInfo = ({
   consumptionList,
@@ -13,33 +14,8 @@ const ConsumptionInfo = ({
 }) => {
   return (
     <div className="list-totals">
-      <h3>Calories needed to</h3>
       <form action="#" method="get" acceptCharset="utf-8">
-        <table>
-          <tbody>
-            <tr>
-              <td>0.5 kg/week loss</td>
-              <td className="subtotal">2500</td>
-            </tr>
-            <tr>
-              <td>1 kg/week loss</td>
-              <td className="subtotal">2500</td>
-            </tr>
-            <tr className="border-top border-secondary">
-              <td>0.5 kg/week gain</td>
-              <td className="subtotal">2500</td>
-            </tr>
-            <tr>
-              <td>1 kg/week gain</td>
-              <td className="subtotal">2500</td>
-            </tr>
-            <tr className="total-row border-top border-secondary">
-              <td>{"Today's calories"}</td>
-              <td className="price-total">{totalCalories}</td>
-            </tr>
-          </tbody>
-        </table>
-
+        <CaloriesStats totalCalories={totalCalories} />
         <div className="row">
           <a
             className="danger-button  btn-lg rounded-pill mt-4"
