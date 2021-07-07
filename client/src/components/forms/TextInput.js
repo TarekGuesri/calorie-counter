@@ -21,12 +21,13 @@ const TextInput = ({ name, label, className, errors, ...rest }) => {
 };
 
 TextInput.propTypes = {
-  className: PropTypes.string.isRequired,
+  className: PropTypes.string,
   name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   errors: PropTypes.array,
 };
 TextInput.defaultProps = {
+  className: '',
   errors: [],
 };
 
