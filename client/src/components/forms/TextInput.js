@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const TextInput = ({ name, label, className, errors, ...rest }) => {
   const error = errors.find((error) => error.param === name);
   return (
-    <form className="form-floating">
+    <div className="form-floating">
       <input
         className={`form-control${error ? ` is-invalid` : ''} ${className}`}
         id={name}
@@ -16,7 +16,7 @@ const TextInput = ({ name, label, className, errors, ...rest }) => {
         {label}
       </label>
       <div className="invalid-feedback">{error?.msg}</div>
-    </form>
+    </div>
   );
 };
 
