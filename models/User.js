@@ -18,6 +18,10 @@ const userSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  profile: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'Profile',
+  },
 });
 
 module.exports = mongoose.model('User', userSchema);
