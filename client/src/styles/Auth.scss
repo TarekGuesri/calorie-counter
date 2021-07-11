@@ -57,3 +57,8 @@
 .floating-label {
   z-index: 3;
 }
+
+.form-check-input:checked {
+  background-color: $primary-color;
+  border-color: $primary-color;
+}
