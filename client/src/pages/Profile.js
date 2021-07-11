@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
+// import axios from 'axios';
 
 import { WEBSITE_NAME } from 'src/utils/brand';
 import TextInput from 'src/components/forms/TextInput';
@@ -12,12 +14,12 @@ const genderOptions = [
   { id: 'female', label: 'Female' },
 ];
 
-const Profile = () => {
+const Profile = ({ user: { profile } }) => {
   const [state, setState] = useState({
-    weight: '',
-    height: '',
-    age: '',
-    gender: 'male',
+    weight: profile?.weight || '',
+    height: profile?.height || '',
+    age: profile?.age || '',
+    gender: profile?.gender || 'male',
     loading: false,
     errors: [],
   });
@@ -89,4 +91,12 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+const mapStateToProps = (state) => ({
+  user: state.auth.user,
+});
+
+Profile.propTypes = {
+  user: PropTypes.object.isRequired,
+};
+
+export default connect(mapStateToProps)(Profile);
