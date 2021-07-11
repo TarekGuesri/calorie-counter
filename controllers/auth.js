@@ -121,7 +121,9 @@ exports.loginUser = async (req, res) => {
 };
 
 exports.checkSelf = async (req, res) => {
-  const user = await User.findById(req.user.id).select('-password');
+  const user = await User.findById(req.user.id)
+    .select('-password')
+    .populate('profile');
   if (!user) return res.status(404).json({ msg: 'User not found!' });
   res.json(user);
 };
