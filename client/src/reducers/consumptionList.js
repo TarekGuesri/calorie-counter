@@ -7,6 +7,7 @@ import {
   DELETE_CONSUMPTION,
   CLEAR_CONSUMPTIONS,
   SAVE_CONSUMPTION_LIST,
+  SET_CONSUMPTIONS_LOADING,
 } from '../actions/types';
 
 const initialState = {
@@ -107,6 +108,12 @@ export default function (state = initialState, action) {
       return {
         ...state,
         saved: true,
+      };
+    }
+    case SET_CONSUMPTIONS_LOADING: {
+      return {
+        ...state,
+        loading: true,
       };
     }
     default:

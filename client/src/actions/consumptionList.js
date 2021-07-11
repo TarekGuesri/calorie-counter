@@ -8,10 +8,14 @@ import {
   DELETE_CONSUMPTION,
   CLEAR_CONSUMPTIONS,
   SAVE_CONSUMPTION_LIST,
+  SET_CONSUMPTIONS_LOADING,
 } from './types';
 
 // Get Consumption List
 export const getConsumptionList = () => async (dispatch) => {
+  dispatch({
+    type: SET_CONSUMPTIONS_LOADING,
+  });
   const res = await axios.get('consumptions/list');
   dispatch({
     type: GET_CONSUMPTION_LIST,
