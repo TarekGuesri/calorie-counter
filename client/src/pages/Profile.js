@@ -46,7 +46,7 @@ const Profile = () => {
           label="Weight (Kg)"
           type="number"
           required
-          min={0}
+          min={1}
           errors={errors}
           onChange={handleOnChange}
         />
@@ -56,7 +56,7 @@ const Profile = () => {
           label="Height (cm)"
           type="number"
           required
-          min={0}
+          min={1}
           errors={errors}
           onChange={handleOnChange}
         />
@@ -66,7 +66,7 @@ const Profile = () => {
           label="Age"
           type="number"
           required
-          min={0}
+          min={1}
           errors={errors}
           onChange={handleOnChange}
         />
