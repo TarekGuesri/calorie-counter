@@ -6,6 +6,7 @@ const {
   registerUser,
   loginUser,
   checkSelf,
+  updateProfile,
 } = require('../../controllers/auth');
 
 const router = express.Router();
@@ -33,9 +34,24 @@ router.post(
 // @access Public
 router.post(
   '/login',
-  check('email', 'Email is required').not().isEmpty(),
-  check('password', 'Password is required').not().isEmpty(),
+  check('email', 'Email is required').notEmpty(),
+  check('password', 'Password is required').notEmpty(),
   loginUser
+);
+
+// @route PUT auth/profile
+// @desc Logs in a user
+// @access Public
+router.put(
+  '/profile',
+  check('weight', 'Weight must be at least 1').isInt({ min: 1 }),
+  check('height', 'Height must be at least 1').isInt({ min: 1 }),
+  check('age', 'Age must be at least 1').isInt({ min: 1 }),
+  check('gender', 'Gender has to be either male or female').isIn([
+    'male',
+    'female',
+  ]),
+  updateProfile
 );
 
 module.exports = router;

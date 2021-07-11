@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const User = require('../models/User');
+const Profile = require('../models/Profile');
 const errorLogger = require('../utils/errorLogger');
 
 exports.registerUser = async (req, res) => {
@@ -123,4 +124,13 @@ exports.checkSelf = async (req, res) => {
   const user = await User.findById(req.user.id).select('-password');
   if (!user) return res.status(404).json({ msg: 'User not found!' });
   res.json(user);
+};
+
+exports.updateProfile = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  res.json('updateProfile');
 };
