@@ -41,9 +41,10 @@ router.post(
 
 // @route PUT auth/profile
 // @desc Logs in a user
-// @access Public
+// @access Private
 router.put(
   '/profile',
+  auth,
   check('weight', 'Weight must be at least 1').isInt({ min: 1 }),
   check('height', 'Height must be at least 1').isInt({ min: 1 }),
   check('age', 'Age must be at least 1').isInt({ min: 1 }),

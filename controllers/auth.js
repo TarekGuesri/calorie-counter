@@ -132,5 +132,23 @@ exports.updateProfile = async (req, res) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  res.json('updateProfile');
+  let user = await User.findById(req.user.id);
+
+  const { weight, height, age, gender } = req.body;
+  let profile = null;
+  // If user doesn't have a profile, we create it. If they do, we just update it
+  if (user.profile) {
+    profile = await Profile.findById(user.profile);
+    profile.weight = weight;
+    profile.height = height;
+    profile.age = age;
+    profile.gender = gender;
+    profile.save();
+  } else {
+    profile = await Profile.create({ weight, height, age, gender });
+    user.profile = profile.id;
+    await user.save();
+  }
+
+  res.json('Profile updated');
 };
