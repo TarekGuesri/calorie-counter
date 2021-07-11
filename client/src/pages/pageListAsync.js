@@ -7,6 +7,7 @@ const Login = lazy(() => import('./Login'));
 const Register = lazy(() => import('./Register'));
 const Profile = lazy(() => import('./Profile'));
 const TodayCalories = lazy(() => import('./TodayCalories'));
+const MyFoods = lazy(() => import('./MyFoods'));
 const NotFound = lazy(() => import('./NotFound'));
 
 export const HomePage = () => (
@@ -32,6 +33,11 @@ export const ProfilePage = () => (
 export const TodayCaloriesPage = () => (
   <Suspense fallback={<PageSpinner />}>
     <TodayCalories />
+  </Suspense>
+);
+export const MyFoodsPage = () => (
+  <Suspense fallback={<PageSpinner />}>
+    <MyFoods />
   </Suspense>
 );
 export const NotFoundPage = () => (

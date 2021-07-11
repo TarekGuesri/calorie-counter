@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import {
   ProfilePage,
   TodayCaloriesPage,
+  MyFoodsPage,
   NotFoundPage,
 } from 'src/pages/pageListAsync';
 import PrivateRoute from 'src/components/routing/PrivateRoute';
@@ -15,6 +16,7 @@ const Application = () => {
       <Switch>
         <Route path="/profile" component={ProfilePage} />
         <PrivateRoute path="/today" component={TodayCaloriesPage} />
+        <PrivateRoute path="/my-foods" component={MyFoodsPage} />
         <Route component={NotFoundPage} />
       </Switch>
     </div>
