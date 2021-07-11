@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import ReactAutocomplete from 'react-autocomplete';
 
@@ -42,7 +43,7 @@ const AddConsumption = ({ addConsumption }) => {
   return (
     <div className="mb-5">
       <h5 style={{ display: 'inline' }}> Add a consumption </h5>
-      (if you want to add a new food click <a href="#">here</a> )
+      (if you want to add a new food click <Link to="/my-foods">here</Link> )
       <br />
       <ReactAutocomplete
         className="awdaw"
@@ -83,14 +84,17 @@ const AddConsumption = ({ addConsumption }) => {
         }
         onSelect={handleOnSelect}
       />
-      <a
+      <button
         className="primary-button  btn-lg rounded-pill mt-4 ms-0 ms-sm-4"
+        style={{
+          padding: '.320rem 1.75rem',
+        }}
         role="button"
         disabled={!food.id}
         onClick={handleAddToList}
       >
         Add
-      </a>
+      </button>
     </div>
   );
 };
