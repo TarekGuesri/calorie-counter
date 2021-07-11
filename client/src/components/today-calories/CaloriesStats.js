@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Estimations from './Estimations';
 
 const CaloriesStats = ({ user: { profile }, totalCalories }) => {
   return (
@@ -9,29 +10,7 @@ const CaloriesStats = ({ user: { profile }, totalCalories }) => {
       <table>
         <tbody>
           {profile ? (
-            <>
-              <tr>
-                <td className="text-center" colSpan="2">
-                  <h3>Calories needed to</h3>
-                </td>
-              </tr>
-              <tr>
-                <td>0.5 kg/week loss</td>
-                <td className="subtotal">2500</td>
-              </tr>
-              <tr>
-                <td>1 kg/week loss</td>
-                <td className="subtotal">2500</td>
-              </tr>
-              <tr className="border-top border-secondary">
-                <td>0.5 kg/week gain</td>
-                <td className="subtotal">2500</td>
-              </tr>
-              <tr>
-                <td>1 kg/week gain</td>
-                <td className="subtotal">2500</td>
-              </tr>
-            </>
+            <Estimations profile={profile} />
           ) : (
             <tr>
               <td className="text-center pb-3" colSpan="2">
