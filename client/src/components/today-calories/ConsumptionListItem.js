@@ -38,6 +38,7 @@ const ConsumptionListItem = ({
           onChange={(e) => updateConsumptionQuantity(id, e.target.value)}
           required
           style={{ width: '130px' }}
+          floating={false}
         />
       </td>
       <td className="food-count px-2 px-md-0">
@@ -51,6 +52,7 @@ const ConsumptionListItem = ({
           onChange={(e) => updateConsumptionCalories(id, e.target.value)}
           required
           style={{ width: '130px' }}
+          floating={false}
         />
       </td>
 

@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const TextInput = ({ name, label, className, errors, ...rest }) => {
+const TextInput = ({ name, label, className, errors, floating, ...rest }) => {
   const error = errors.find((error) => error.param === name);
   return (
-    <div className="form-floating">
+    <div className={`${floating && 'form-floating'}`}>
       <input
         className={`form-control${error ? ` is-invalid` : ''} ${className}`}
         id={name}
@@ -12,9 +12,11 @@ const TextInput = ({ name, label, className, errors, ...rest }) => {
         placeholder={label}
         {...rest}
       />
-      <label className="floating-label" htmlFor={name}>
-        {label}
-      </label>
+      {floating && (
+        <label className="floating-label" htmlFor={name}>
+          {label}
+        </label>
+      )}
       <div className="invalid-feedback">{error?.msg}</div>
     </div>
   );
@@ -22,12 +24,14 @@ const TextInput = ({ name, label, className, errors, ...rest }) => {
 
 TextInput.propTypes = {
   className: PropTypes.string,
+  floating: PropTypes.bool,
   name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   errors: PropTypes.array,
 };
 TextInput.defaultProps = {
   className: '',
+  floating: true,
   errors: [],
 };
 
