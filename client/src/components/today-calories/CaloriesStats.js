@@ -1,16 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-const profile = false;
-const CaloriesStats = ({ totalCalories }) => {
+const CaloriesStats = ({ user: { profile }, totalCalories }) => {
   return (
     <>
       <table>
         <tbody>
           {profile ? (
             <>
-              {' '}
               <tr>
                 <td className="text-center" colSpan="2">
                   <h3>Calories needed to</h3>
@@ -52,8 +51,13 @@ const CaloriesStats = ({ totalCalories }) => {
   );
 };
 
+const mapStateToProps = (state) => ({
+  user: state.auth.user,
+});
+
 CaloriesStats.propTypes = {
+  user: PropTypes.object.isRequired,
   totalCalories: PropTypes.number.isRequired,
 };
 
-export default CaloriesStats;
+export default connect(mapStateToProps)(CaloriesStats);
