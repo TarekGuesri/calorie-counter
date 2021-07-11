@@ -2,19 +2,20 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-// import axios from 'axios';
+import axios from 'axios';
 
 import { WEBSITE_NAME } from 'src/utils/brand';
 import TextInput from 'src/components/forms/TextInput';
 import RadioButtons from 'src/components/forms/RadioButtons';
 import AsyncButton from 'src/components/buttons/AsyncButton';
+import { loadUser } from 'src/actions/auth';
 
 const genderOptions = [
   { id: 'male', label: 'Male' },
   { id: 'female', label: 'Female' },
 ];
 
-const Profile = ({ user: { profile } }) => {
+const Profile = ({ user: { profile }, loadUser }) => {
   const [state, setState] = useState({
     weight: profile?.weight || '',
     height: profile?.height || '',
@@ -30,7 +31,23 @@ const Profile = ({ user: { profile } }) => {
 
   const handleSaveProfile = async (e) => {
     e.preventDefault();
-    console.log('handleSaveProfile');
+    setState({ ...state, errors: [], loading: true });
+    const { weight, height, age, gender } = state;
+
+    const formData = { weight, height, age, gender };
+    try {
+      await axios.put('auth/profile', formData);
+      // We load the user so we get the updated profile
+      loadUser();
+      setState((prevState) => ({ ...prevState, errors: [], loading: false }));
+    } catch (error) {
+      const {
+        response: {
+          data: { errors },
+        },
+      } = error;
+      setState((prevState) => ({ ...prevState, errors, loading: false }));
+    }
   };
 
   const { weight, height, age, gender, loading, errors } = state;
@@ -97,6 +114,7 @@ const mapStateToProps = (state) => ({
 
 Profile.propTypes = {
   user: PropTypes.object.isRequired,
+  loadUser: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps)(Profile);
+export default connect(mapStateToProps, { loadUser })(Profile);
