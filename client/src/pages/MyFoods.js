@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import Helmet from 'react-helmet';
+import { Modal } from 'bootstrap';
 
 import { WEBSITE_NAME } from 'src/utils/brand';
 import FoodList from 'src/components/my-foods/FoodList';
@@ -7,6 +8,24 @@ import AddFood from 'src/components/my-foods/AddFood';
 import 'src/styles/MyFoods.scss';
 
 const MyFoods = () => {
+  const addModalRef = useRef();
+
+  const handleOpenAdd = () => {
+    console.log('open');
+    const modalEle = addModalRef.current;
+    const bsModal = new Modal(modalEle);
+    bsModal.show();
+  };
+
+  const handleCloseAdd = () => {
+    console.log('close');
+    const modalEle = addModalRef.current;
+    const bsModal = Modal.getInstance(modalEle);
+    bsModal.hide();
+  };
+
+  console.log(addModalRef);
+
   return (
     <>
       {' '}
@@ -18,22 +37,20 @@ const MyFoods = () => {
         <div className="p-2 bd-highlight">
           {' '}
           <button
-            className="primary-button  btn-lg rounded-pill mt-4 mb-2 ms-0 ms-sm-4"
+            className="primary-button btn-lg rounded-pill mt-4 ms-0 ms-sm-4"
             style={{
               padding: '.320rem 1.75rem',
             }}
             type="button"
-            data-bs-toggle="modal"
-            data-bs-target="#addFood"
             // disabled={!food.id}
-            // onClick={handleAddToList}
+            onClick={handleOpenAdd}
           >
             Add
           </button>
         </div>
       </div>
       <FoodList />
-      <AddFood />
+      <AddFood modalRef={addModalRef} handleClose={handleCloseAdd} />
     </>
   );
 };

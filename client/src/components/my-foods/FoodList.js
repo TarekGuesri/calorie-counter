@@ -7,7 +7,7 @@ const foods = [{ id: 1 }, { id: 2 }, { id: 3 }];
 
 const FoodList = () => {
   return (
-    <div className="table-responsive mt-5">
+    <div className="table-responsive mt-2">
       <table className="table table-image">
         <thead>
           <tr>
