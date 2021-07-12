@@ -28,14 +28,12 @@ const MyFoods = () => {
 
   return (
     <>
-      {' '}
       <Helmet>
         <title>{`${WEBSITE_NAME} - My Foods`}</title>
       </Helmet>
       <h3 className="primary-text"> {'My Foods'}</h3>
       <div className="d-flex flex-row-reverse bd-highlight">
         <div className="p-2 bd-highlight">
-          {' '}
           <button
             className="primary-button btn-lg rounded-pill mt-4 ms-0 ms-sm-4"
             type="button"
