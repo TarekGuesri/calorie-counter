@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import ActionModal from 'src/components/modals/ActionModal';
 import TextInput from 'src/components/forms/TextInput';
+import FileInput from 'src/components/forms/FileInput';
 import AsyncButton from 'src/components/buttons/AsyncButton';
 
 const AddFood = ({ modalRef, handleClose }) => {
-  console.log(modalRef);
+  // We use the ref so we can reset the value of the file input since it is not a controlled component
+  const imageInputRef = useRef();
 
   const [state, setState] = useState({
     name: '',
@@ -21,16 +23,21 @@ const AddFood = ({ modalRef, handleClose }) => {
   };
 
   const handleSetImage = (image) => {
-    console.log(image);
     setState({ ...state, image });
   };
 
-  const handleAddFood = async () => {
+  const handleEmptyImage = () => {
+    imageInputRef.current.value = '';
+    setState({ ...state, image: null });
+  };
+
+  const handleAddFood = async (e) => {
+    e.preventDefault();
     console.log('handleAddFood');
     console.log(state);
   };
 
-  const { name, caloriesPerPortion, loading, errors } = state;
+  const { name, caloriesPerPortion, image, loading, errors } = state;
 
   return (
     <ActionModal
@@ -39,17 +46,25 @@ const AddFood = ({ modalRef, handleClose }) => {
       handleClose={handleClose}
       actions={
         <>
-          <AsyncButton
+          <button
+            className="primary-button btn-lg rounded-pill ms-0 ms-sm-4"
             type="button"
+            disabled={!image}
+            onClick={handleEmptyImage}
+          >
+            Empty Image
+          </button>
+          <AsyncButton
+            type="submit"
             text="Add"
             className="primary-button btn-lg rounded-pill ms-0 ms-sm-4"
             loading={loading}
-            onClick={handleAddFood}
+            form="add-food-form"
           />
         </>
       }
     >
-      <div className="px-5">
+      <form className="px-5" id="add-food-form" onSubmit={handleAddFood}>
         <TextInput
           name="name"
           value={name}
@@ -70,18 +85,14 @@ const AddFood = ({ modalRef, handleClose }) => {
           errors={errors}
           onChange={handleOnChange}
         />
-        <div className="mb-3 text-start">
-          <label htmlFor="formFile" className="form-label mb-0 mt-1">
-            Upload an image
-          </label>
-          <input
-            className="form-control mt-1"
-            type="file"
-            id="formFile"
-            onChange={(e) => handleSetImage(e.target.files[0])}
-          />
-        </div>
-      </div>
+
+        <FileInput
+          name="image"
+          label="Upload an image"
+          handleChange={handleSetImage}
+          reference={imageInputRef}
+        />
+      </form>
     </ActionModal>
   );
 };

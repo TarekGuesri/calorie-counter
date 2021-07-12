@@ -11,20 +11,16 @@ const MyFoods = () => {
   const addModalRef = useRef();
 
   const handleOpenAdd = () => {
-    console.log('open');
     const modalEle = addModalRef.current;
     const bsModal = new Modal(modalEle);
     bsModal.show();
   };
 
   const handleCloseAdd = () => {
-    console.log('close');
     const modalEle = addModalRef.current;
     const bsModal = Modal.getInstance(modalEle);
     bsModal.hide();
   };
-
-  console.log(addModalRef);
 
   return (
     <>
