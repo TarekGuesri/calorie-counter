@@ -38,11 +38,7 @@ const MyFoods = () => {
           {' '}
           <button
             className="primary-button btn-lg rounded-pill mt-4 ms-0 ms-sm-4"
-            style={{
-              padding: '.320rem 1.75rem',
-            }}
             type="button"
-            // disabled={!food.id}
             onClick={handleOpenAdd}
           >
             Add
