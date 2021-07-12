@@ -8,12 +8,9 @@ const Modal = ({ title, modalRef, handleClose, actions, children }) => {
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title">{title}</h5>
-            <button
-              type="button"
-              className="btn-close"
-              onClick={handleClose}
-              aria-label="Close"
-            ></button>
+            <a href="#" className="text-dark" onClick={handleClose}>
+              <i className="fas fa-times"></i>
+            </a>
           </div>
           <div className="modal-body">{children}</div>
           <div className="modal-footer">{actions}</div>
@@ -27,7 +24,7 @@ Modal.propTypes = {
   title: PropTypes.string.isRequired,
   modalRef: PropTypes.object.isRequired,
   handleClose: PropTypes.func.isRequired,
-  actions: PropTypes.element.isRequired,
+  actions: PropTypes.element.isRequired, // The buttons in the modal footer
   children: PropTypes.any,
 };
 
