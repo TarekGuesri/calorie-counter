@@ -25,7 +25,6 @@ router.post(
   check('caloriesPerPortion', 'Calories per portion must at least 1').isInt({
     min: 1,
   }),
-  check('user', 'User is required').notEmpty(),
   addFood
 );
 

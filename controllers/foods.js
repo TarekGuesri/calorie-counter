@@ -35,7 +35,7 @@ exports.addFood = async (req, res) => {
     }
 
     // Adding the Food
-    const food = await Food.create({ name, caloriesPerPortion, user: user.id });
+    await Food.create({ name, caloriesPerPortion, user: user.id });
 
     res.json('Food added successfully');
   } catch (error) {
