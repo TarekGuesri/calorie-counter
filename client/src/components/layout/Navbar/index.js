@@ -16,7 +16,7 @@ const Navbar = ({ isAuthenticated, logout }) => {
           CaloriesCounter
         </NavLink>
         <button
-          className="navbar-toggler btn-circle btn-lg"
+          className="navbar-toggler btn-circle"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbar"
@@ -33,17 +33,12 @@ const Navbar = ({ isAuthenticated, logout }) => {
           <ul className="navbar-nav">
             <li className="nav-item">
               <NavLink className="nav-link" aria-current="page" exact to="/">
-                Centered nav only
+                Home
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink
-                className="nav-link disabled"
-                to="/page"
-                tabIndex="-1"
-                aria-disabled="true"
-              >
-                Disabled
+              <NavLink className="nav-link" aria-current="page" to="my-foods">
+                My Foods
               </NavLink>
             </li>
 
