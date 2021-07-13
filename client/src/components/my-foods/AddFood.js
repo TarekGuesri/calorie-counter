@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 
 import ActionModal from 'src/components/modals/ActionModal';
 import TextInput from 'src/components/forms/TextInput';
@@ -23,6 +24,7 @@ const AddFood = ({ modalRef, handleClose }) => {
   };
 
   const handleSetImage = (image) => {
+    // TODO : Add an image extention validation
     setState({ ...state, image });
   };
 
@@ -34,7 +36,28 @@ const AddFood = ({ modalRef, handleClose }) => {
   const handleAddFood = async (e) => {
     e.preventDefault();
     console.log('handleAddFood');
-    console.log(state);
+    const { name, caloriesPerPortion, image } = state;
+
+    // Creating a FormData object so we can append the image file to it
+    const formData = new FormData();
+
+    formData.append('name', name);
+    formData.append('caloriesPerPortion', caloriesPerPortion);
+    formData.append('image', image, image.name);
+
+    console.log(formData);
+
+    try {
+      const res = await axios.post('foods', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      console.log(res.data);
+    } catch (error) {
+      console.log(error);
+      console.log(error?.response);
+    }
   };
 
   const { name, caloriesPerPortion, image, loading, errors } = state;

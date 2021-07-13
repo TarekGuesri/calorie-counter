@@ -4,6 +4,8 @@ const dotenv = require('dotenv');
 const morgan = require('morgan');
 const colors = require('colors');
 const path = require('path');
+const mkdirp = require('mkdirp');
+const fileUpload = require('express-fileupload');
 const bodyParser = require('body-parser');
 const connectDB = require('./config/db');
 
@@ -18,11 +20,24 @@ const app = express();
 // Enabling cors
 app.use(cors());
 
+// Adding uploads folder for food images
+mkdirp.sync('uploads/images/foods');
+
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // parse application/json
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: '50mb' }));
+
+// Enabling file-upload
+app.use(
+  fileUpload({
+    createParentPath: true, // This allows the mv method to create the path that has been passed
+    limits: { fileSize: 25 * 1024 * 1024 },
+    abortOnLimit: true,
+    responseOnLimit: 'The image file-size can not be more than 25 MB',
+  })
+);
 
 // Dev logging middleware
 if (process.env.NODE_ENV === 'development') {

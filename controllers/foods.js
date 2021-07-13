@@ -23,7 +23,11 @@ exports.addFood = async (req, res) => {
 
   // TODO : Add image
   const { name, caloriesPerPortion } = req.body;
-  let { user } = req.body;
+  let user = req.user.id;
+  console.log(req.files.image);
+  console.log(req.body.image);
+
+  return res.json(req.body);
 
   try {
     user = await User.findById(user);
