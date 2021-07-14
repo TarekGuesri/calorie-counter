@@ -29,6 +29,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json({ limit: '50mb' }));
 
+// Making uploads folder public
+app.use(express.static(path.resolve('./uploads')));
+
 // Enabling file-upload
 app.use(
   fileUpload({

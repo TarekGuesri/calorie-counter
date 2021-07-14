@@ -2,6 +2,12 @@ const mongoose = require('mongoose');
 const fs = require('fs');
 const sharp = require('sharp');
 
+const getImage = (image) => {
+  if (image) {
+    return process.env.BASE_URL + image;
+  }
+};
+
 const foodSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -14,6 +20,7 @@ const foodSchema = new mongoose.Schema({
   },
   image: {
     type: String,
+    get: getImage,
   },
   user: {
     type: mongoose.Schema.ObjectId,
@@ -31,14 +38,17 @@ foodSchema.statics.addImage = async (foodId, imageFile) => {
   const tmpPath = `uploads/images/foods/${foodId}-tmp.png`;
   await imageFile.mv(tmpPath);
 
-  const path = `uploads/images/foods/${foodId}.png`;
+  // The image path that's going ot be used as a link
+  const path = `images/foods/${foodId}.png`;
+  // The image path on the host
+  const filePpath = `uploads/${path}`;
 
   await sharp(tmpPath)
     .resize({ width: 600 })
     .flatten({
       background: 'white',
     })
-    .toFile(path);
+    .toFile(filePpath);
 
   try {
     // We delete the temporary file
@@ -50,5 +60,8 @@ foodSchema.statics.addImage = async (foodId, imageFile) => {
     console.error(err);
   }
 };
+
+foodSchema.set('toObject', { getters: true });
+foodSchema.set('toJSON', { getters: true });
 
 module.exports = mongoose.model('Food', foodSchema);
