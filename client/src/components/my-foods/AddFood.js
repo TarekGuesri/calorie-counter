@@ -37,7 +37,6 @@ const AddFood = ({ modalRef, handleClose }) => {
   };
 
   const handleSetImage = (image) => {
-    // TODO : Add an image extention validation
     setState({ ...state, image });
   };
 

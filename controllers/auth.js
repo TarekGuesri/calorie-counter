@@ -54,8 +54,6 @@ exports.registerUser = async (req, res) => {
     // Saving the user
     await user.save();
 
-    // TODO : create a profile for the user
-
     const payload = {
       user: {
         id: user.id,
