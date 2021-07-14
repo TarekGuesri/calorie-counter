@@ -23,8 +23,6 @@ exports.addFood = async (req, res) => {
 
   // If image was sent, we check its extension
   if (req.files && req.files.image) {
-    console.log(req.files.image);
-
     const extension = req.files.image.name.split('.').pop();
 
     const imageExtensions = ['jpg', 'jpeg', 'png'];
@@ -48,24 +46,29 @@ exports.addFood = async (req, res) => {
       });
     }
 
-    // TODO : Check if there is a food with the same name for the user (to avoid duplicates)
+    //Checking if there is a food with the same name for the user (to avoid duplicates)
+    let food = await Food.findOne({ name, user: user.id });
+    if (food) {
+      return res.status(400).json({
+        errors: [
+          { param: 'name', msg: 'You already have a food with this name' },
+        ],
+      });
+    }
 
     // Adding the Food
-    let food = await Food.create({ name, caloriesPerPortion, user: user.id });
+    food = await Food.create({ name, caloriesPerPortion, user: user.id });
 
     // If image was uploaded, we save it and added its path to the food's image
     if (req.files && req.files.image) {
-      console.log(req.files.image);
-
       const image = await Food.addImage(food.id, req.files.image);
-      console.log('image: ', image);
 
       // Now we add the image path to the food's image field
       food.image = image;
       await food.save();
     }
 
-    res.json('Food was added successfully');
+    res.json('The food was added successfully');
   } catch (error) {
     errorLogger(req, 1, error);
     res.status(500).send('Server error');

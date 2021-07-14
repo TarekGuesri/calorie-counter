@@ -212,3 +212,11 @@ input[type='checkbox'] {
   position: absolute;
   left: 0.15rem;
 }
+
+/* ---------------------------------------------------
+    Alerts
+----------------------------------------------------- */
+.alert-success {
+  background-color: $primary-color;
+  color: #fff;
+}
