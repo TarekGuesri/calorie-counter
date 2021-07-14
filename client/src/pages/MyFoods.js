@@ -1,4 +1,5 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
+import axios from 'axios';
 import Helmet from 'react-helmet';
 import { Modal } from 'bootstrap';
 
@@ -10,6 +11,29 @@ import 'src/styles/MyFoods.scss';
 const MyFoods = () => {
   const addModalRef = useRef();
 
+  const [state, setState] = useState({
+    foods: [],
+    loading: true,
+  });
+
+  useEffect(() => {
+    getFoods();
+  }, []);
+
+  const getFoods = async () => {
+    setState({
+      ...state,
+      loading: true,
+    });
+
+    const res = await axios.get('foods/available');
+
+    setState((prevState) => ({
+      ...prevState,
+      foods: res.data,
+      loading: false,
+    }));
+  };
   const handleOpenAdd = () => {
     const modalEle = addModalRef.current;
     const bsModal = new Modal(modalEle);
@@ -21,6 +45,8 @@ const MyFoods = () => {
     const bsModal = Modal.getInstance(modalEle);
     bsModal.hide();
   };
+
+  const { foods, loading } = state;
 
   return (
     <>
@@ -39,8 +65,12 @@ const MyFoods = () => {
           </button>
         </div>
       </div>
-      <FoodList />
-      <AddFood modalRef={addModalRef} handleClose={handleCloseAdd} />
+      <FoodList foods={foods} loading={loading} />
+      <AddFood
+        modalRef={addModalRef}
+        handleRefresh={getFoods}
+        handleClose={handleCloseAdd}
+      />
     </>
   );
 };

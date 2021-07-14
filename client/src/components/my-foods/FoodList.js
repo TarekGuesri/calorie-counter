@@ -1,11 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import 'src/styles/TodayCalories.scss';
-import FoodItem from './FoodItem';
+import Spinner from 'src/components/layout/Spinner';
+import FoodListItems from './FoodListItems';
 
-const foods = [{ id: 1 }, { id: 2 }, { id: 3 }];
-
-const FoodList = () => {
+const FoodList = ({ foods, loading }) => {
   return (
     <div className="table-responsive mt-2">
       <table className="table table-image">
@@ -20,13 +20,24 @@ const FoodList = () => {
           </tr>
         </thead>
         <tbody>
-          {foods.map((food) => (
-            <FoodItem key={food.id} />
-          ))}
+          {loading ? (
+            <tr className="text-success">
+              <td colSpan="5" style={{ border: 0, padding: '40px' }}>
+                <Spinner />
+              </td>
+            </tr>
+          ) : (
+            <FoodListItems foods={foods} />
+          )}
         </tbody>
       </table>
     </div>
   );
+};
+
+FoodList.propTypes = {
+  foods: PropTypes.array.isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
 export default FoodList;

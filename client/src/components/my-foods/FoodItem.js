@@ -1,28 +1,37 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const FoodItem = () => {
+const FoodItem = ({ food }) => {
+  const { _id, name, caloriesPerPortion, image } = food;
   return (
     <tr>
       <td>
         <img
-          src="https://assets.bonappetit.com/photos/597f6564e85ce178131a6475/master/w_1200,c_limit/0817-murray-mancini-dried-tomato-pie.jpg"
+          src={
+            image ||
+            'https://assets.bonappetit.com/photos/597f6564e85ce178131a6475/master/w_1200,c_limit/0817-murray-mancini-dried-tomato-pie.jpg'
+          }
           className="img-fluid food-img"
-          alt="Food"
+          alt="Food Image"
         />
       </td>
-      <td>Yogurt (frozen, low fat) (1 cup)</td>
-      <td>250</td>
+      <td>{name}</td>
+      <td>{caloriesPerPortion}</td>
 
       <td className="ps-3 ps-md-0">
-        <a href="#" className="text-danger me-3">
-          <i className="fas fa-trash-alt"></i>
+        <a href="#" className="text-sucess me-3" data-id={_id}>
+          <i className="fas fa-pen"></i>
         </a>
-        <a href="#" className="text-danger">
+        <a href="#" className="text-danger" data-id={_id}>
           <i className="fas fa-trash-alt"></i>
         </a>
       </td>
     </tr>
   );
+};
+
+FoodItem.propTypes = {
+  food: PropTypes.object.isRequired,
 };
 
 export default FoodItem;
