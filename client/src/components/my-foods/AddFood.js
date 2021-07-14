@@ -36,6 +36,7 @@ const AddFood = ({ modalRef, handleClose }) => {
   const handleAddFood = async (e) => {
     e.preventDefault();
     console.log('handleAddFood');
+    setState({ ...state, loading: true });
     const { name, caloriesPerPortion, image } = state;
 
     // Creating a FormData object so we can append the image file to it
@@ -43,7 +44,9 @@ const AddFood = ({ modalRef, handleClose }) => {
 
     formData.append('name', name);
     formData.append('caloriesPerPortion', caloriesPerPortion);
-    formData.append('image', image, image.name);
+    if (image) {
+      formData.append('image', image, image.name);
+    }
 
     console.log(formData);
 
@@ -54,6 +57,7 @@ const AddFood = ({ modalRef, handleClose }) => {
         },
       });
       console.log(res.data);
+      setState((prevState) => ({ ...prevState, loading: false }));
     } catch (error) {
       console.log(error);
       console.log(error?.response);
@@ -114,6 +118,7 @@ const AddFood = ({ modalRef, handleClose }) => {
           label="Upload an image"
           handleChange={handleSetImage}
           reference={imageInputRef}
+          accept="image/png, image/jpg, image/jpeg"
         />
       </form>
     </ActionModal>

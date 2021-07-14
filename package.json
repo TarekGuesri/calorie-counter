@@ -26,7 +26,8 @@
     "mkdirp": "^1.0.4",
     "mongoose": "^5.12.13",
     "morgan": "^1.10.0",
-    "sass": "^1.34.0"
+    "sass": "^1.34.0",
+    "sharp": "^0.28.3"
   },
   "devDependencies": {
     "concurrently": "^6.0.2",
