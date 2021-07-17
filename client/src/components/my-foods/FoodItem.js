@@ -19,10 +19,10 @@ const FoodItem = ({ food }) => {
       <td>{caloriesPerPortion}</td>
 
       <td className="ps-3 ps-md-0">
-        <a href="#" className="text-sucess me-3" data-id={_id}>
+        <a href="#" className="text-sucess p-3" data-id={_id}>
           <i className="fas fa-pen"></i>
         </a>
-        <a href="#" className="text-danger" data-id={_id}>
+        <a href="#" className="text-danger p-3" data-id={_id}>
           <i className="fas fa-trash-alt"></i>
         </a>
       </td>
