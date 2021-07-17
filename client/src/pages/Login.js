@@ -71,7 +71,7 @@ const Login = ({ isAuthenticated, login }) => {
         <TextInput
           name="email"
           value={email}
-          label="Email"
+          label="Email*"
           type="email"
           required
           errors={errors}
@@ -80,7 +80,7 @@ const Login = ({ isAuthenticated, login }) => {
         <TextInput
           name="password"
           value={password}
-          label="Password"
+          label="Password*"
           type="password"
           required
           errors={errors}
@@ -101,6 +101,7 @@ const Login = ({ isAuthenticated, login }) => {
           text="Login"
           className="primary-button btn-lg rounded-pill mt-1 py-2 px-4"
           loading={loading}
+          disabled={!email || !password}
         />
       </form>
     </div>

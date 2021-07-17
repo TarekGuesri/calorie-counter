@@ -9,9 +9,8 @@ import { WEBSITE_NAME } from 'src/utils/brand';
 import TextInput from 'src/components/forms/TextInput';
 import AsyncButton from 'src/components/buttons/AsyncButton';
 import 'src/styles/Auth.scss';
-import { login } from 'src/actions/auth';
 
-const Register = ({ isAuthenticated, login }) => {
+const Register = ({ isAuthenticated }) => {
   const [state, setState] = useState({
     username: 'john',
     email: 'test@mail.com',
@@ -79,7 +78,7 @@ const Register = ({ isAuthenticated, login }) => {
         <TextInput
           name="username"
           value={username}
-          label="Username"
+          label="Username*"
           type="text"
           required
           errors={errors}
@@ -88,7 +87,7 @@ const Register = ({ isAuthenticated, login }) => {
         <TextInput
           name="email"
           value={email}
-          label="Email"
+          label="Email*"
           type="email"
           required
           errors={errors}
@@ -97,7 +96,7 @@ const Register = ({ isAuthenticated, login }) => {
         <TextInput
           name="password"
           value={password}
-          label="Password"
+          label="Password*"
           type="password"
           required
           errors={errors}
@@ -106,7 +105,7 @@ const Register = ({ isAuthenticated, login }) => {
         <TextInput
           name="confirmPassword"
           value={confirmPassword}
-          label="Confirm Password"
+          label="Confirm Password*"
           type="password"
           required
           errors={errors}
@@ -127,6 +126,7 @@ const Register = ({ isAuthenticated, login }) => {
           text="Sign up"
           className="primary-button btn-lg rounded-pill mt-1 py-2 px-4"
           loading={loading}
+          disabled={!username || !email || !password || !confirmPassword}
         />
       </form>
     </div>
@@ -139,7 +139,6 @@ const mapStateToProps = (state) => ({
 
 Register.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
-  login: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps, { login })(Register);
+export default connect(mapStateToProps)(Register);
