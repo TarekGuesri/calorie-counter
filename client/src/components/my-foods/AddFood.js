@@ -7,7 +7,7 @@ import TextInput from 'src/components/forms/TextInput';
 import FileInput from 'src/components/forms/FileInput';
 import AsyncButton from 'src/components/buttons/AsyncButton';
 
-const AddFood = ({ modalRef, handleClose }) => {
+const AddFood = ({ modalRef, handleClose, handleGetFoods }) => {
   // We use the ref so we can reset the value of the file input since it is not a controlled component
   const imageInputRef = useRef();
 
@@ -76,6 +76,8 @@ const AddFood = ({ modalRef, handleClose }) => {
         successMessage: res.data,
       }));
       imageInputRef.current.value = '';
+
+      handleGetFoods();
 
       // We also hide the success message after few seconds
       messageTimerRef.current = setTimeout(() => {
@@ -173,6 +175,7 @@ const AddFood = ({ modalRef, handleClose }) => {
 AddFood.propTypes = {
   modalRef: PropTypes.object.isRequired,
   handleClose: PropTypes.func.isRequired,
+  handleGetFoods: PropTypes.func.isRequired,
 };
 
 export default AddFood;

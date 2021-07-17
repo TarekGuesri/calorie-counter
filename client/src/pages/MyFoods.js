@@ -114,6 +114,7 @@ const MyFoods = () => {
           modalRef={addModalRef}
           handleRefresh={getFoods}
           handleClose={handleCloseAdd}
+          handleGetFoods={getFoods}
         />
       )}
       {editOpen && (
@@ -122,6 +123,7 @@ const MyFoods = () => {
           target={target}
           handleRefresh={getFoods}
           handleClose={handleCloseEdit}
+          handleGetFoods={getFoods}
         />
       )}
     </>
