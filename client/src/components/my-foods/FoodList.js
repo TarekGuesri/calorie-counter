@@ -5,7 +5,7 @@ import 'src/styles/TodayCalories.scss';
 import Spinner from 'src/components/layout/Spinner';
 import FoodListItems from './FoodListItems';
 
-const FoodList = ({ foods, loading }) => {
+const FoodList = ({ foods, loading, handleOpenEdit }) => {
   return (
     <div className="table-responsive mt-2">
       <table className="table table-image">
@@ -27,7 +27,7 @@ const FoodList = ({ foods, loading }) => {
               </td>
             </tr>
           ) : (
-            <FoodListItems foods={foods} />
+            <FoodListItems foods={foods} handleOpenEdit={handleOpenEdit} />
           )}
         </tbody>
       </table>
@@ -38,6 +38,7 @@ const FoodList = ({ foods, loading }) => {
 FoodList.propTypes = {
   foods: PropTypes.array.isRequired,
   loading: PropTypes.bool.isRequired,
+  handleOpenEdit: PropTypes.func.isRequired,
 };
 
 export default FoodList;

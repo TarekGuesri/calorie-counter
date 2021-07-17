@@ -7,7 +7,7 @@ import TextInput from 'src/components/forms/TextInput';
 import FileInput from 'src/components/forms/FileInput';
 import AsyncButton from 'src/components/buttons/AsyncButton';
 
-const AddFood = ({ modalRef, handleClose }) => {
+const EditFood = ({ modalRef, target, handleClose }) => {
   // We use the ref so we can reset the value of the file input since it is not a controlled component
   const imageInputRef = useRef();
 
@@ -15,8 +15,8 @@ const AddFood = ({ modalRef, handleClose }) => {
   const messageTimerRef = useRef(null);
 
   const [state, setState] = useState({
-    name: '',
-    caloriesPerPortion: '',
+    name: target.name,
+    caloriesPerPortion: target.caloriesPerPortion,
     image: null,
     loading: false,
     errors: [],
@@ -45,7 +45,7 @@ const AddFood = ({ modalRef, handleClose }) => {
     setState({ ...state, image: null });
   };
 
-  const handleAddFood = async (e) => {
+  const handleEditFood = async (e) => {
     e.preventDefault();
     setState({ ...state, loading: true, errors: [] });
     const { name, caloriesPerPortion, image } = state;
@@ -103,10 +103,12 @@ const AddFood = ({ modalRef, handleClose }) => {
     errors,
   } = state;
 
+  console.log(target);
+
   return (
     <ActionModal
       modalRef={modalRef}
-      title="Add Food"
+      title="Edit Food"
       handleClose={handleClose}
       actions={
         <>
@@ -120,7 +122,7 @@ const AddFood = ({ modalRef, handleClose }) => {
           </button>
           <AsyncButton
             type="submit"
-            text="Add"
+            text="Edit"
             className="primary-button btn-lg rounded-pill ms-0 ms-sm-4"
             loading={loading}
             disabled={!name || !caloriesPerPortion}
@@ -129,7 +131,7 @@ const AddFood = ({ modalRef, handleClose }) => {
         </>
       }
     >
-      <form className="px-5" id="add-food-form" onSubmit={handleAddFood}>
+      <form className="px-5" id="add-food-form" onSubmit={handleEditFood}>
         <TextInput
           name="name"
           value={name}
@@ -170,9 +172,10 @@ const AddFood = ({ modalRef, handleClose }) => {
   );
 };
 
-AddFood.propTypes = {
+EditFood.propTypes = {
   modalRef: PropTypes.object.isRequired,
+  target: PropTypes.object.isRequired,
   handleClose: PropTypes.func.isRequired,
 };
 
-export default AddFood;
+export default EditFood;

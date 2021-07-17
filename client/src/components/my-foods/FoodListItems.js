@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import FoodItem from './FoodItem';
 
-const FoodListItems = ({ foods }) => {
+const FoodListItems = ({ foods, handleOpenEdit }) => {
   return (
     <>
       {foods.length < 1 ? (
@@ -13,7 +13,13 @@ const FoodListItems = ({ foods }) => {
           </td>
         </tr>
       ) : (
-        foods.map((food) => <FoodItem key={food._id} food={food} />)
+        foods.map((food) => (
+          <FoodItem
+            key={food._id}
+            food={food}
+            handleOpenEdit={handleOpenEdit}
+          />
+        ))
       )}
     </>
   );
@@ -21,6 +27,7 @@ const FoodListItems = ({ foods }) => {
 
 FoodListItems.propTypes = {
   foods: PropTypes.array.isRequired,
+  handleOpenEdit: PropTypes.func.isRequired,
 };
 
 export default FoodListItems;

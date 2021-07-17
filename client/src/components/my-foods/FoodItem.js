@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const FoodItem = ({ food }) => {
+const FoodItem = ({ food, handleOpenEdit }) => {
   const { _id, name, caloriesPerPortion, image } = food;
   return (
     <tr>
@@ -19,11 +19,16 @@ const FoodItem = ({ food }) => {
       <td>{caloriesPerPortion}</td>
 
       <td className="ps-3 ps-md-0">
-        <a href="#" className="text-sucess p-3" data-id={_id}>
-          <i className="fas fa-pen"></i>
+        <a
+          href="#"
+          className="text-sucess p-3"
+          data-id={_id}
+          onClick={handleOpenEdit}
+        >
+          <i className="fas fa-pen action-icon"></i>
         </a>
         <a href="#" className="text-danger p-3" data-id={_id}>
-          <i className="fas fa-trash-alt"></i>
+          <i className="fas fa-trash-alt action-icon"></i>
         </a>
       </td>
     </tr>
@@ -32,6 +37,7 @@ const FoodItem = ({ food }) => {
 
 FoodItem.propTypes = {
   food: PropTypes.object.isRequired,
+  handleOpenEdit: PropTypes.func.isRequired,
 };
 
 export default FoodItem;

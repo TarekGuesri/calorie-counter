@@ -6,19 +6,47 @@ import Modal from 'bootstrap/js/dist/modal';
 import { WEBSITE_NAME } from 'src/utils/brand';
 import FoodList from 'src/components/my-foods/FoodList';
 import AddFood from 'src/components/my-foods/AddFood';
+import EditFood from 'src/components/my-foods/EditFood';
 import 'src/styles/MyFoods.scss';
 
 const MyFoods = () => {
+  // Modals refs
   const addModalRef = useRef();
+  const editModalRef = useRef();
+  // const deleteModalRef = useRef();
 
   const [state, setState] = useState({
     foods: [],
+    target: null, // Edit or Remove modal target
+    addOpen: false,
+    editOpen: false,
+    deleteOpen: false,
     loading: true,
   });
 
   useEffect(() => {
     getFoods();
   }, []);
+
+  // We use this to open the add modal when addOpen state changes
+  useEffect(() => {
+    const { addOpen } = state;
+    if (addOpen) {
+      const modalEle = addModalRef.current;
+      const bsModal = new Modal(modalEle);
+      bsModal.show();
+    }
+  }, [state.addOpen]);
+
+  // We use this to open the edit modal when editOpen state changes
+  useEffect(() => {
+    const { editOpen } = state;
+    if (editOpen) {
+      const modalEle = editModalRef.current;
+      const bsModal = new Modal(modalEle);
+      bsModal.show();
+    }
+  }, [state.editOpen]);
 
   const getFoods = async () => {
     setState({
@@ -34,19 +62,30 @@ const MyFoods = () => {
       loading: false,
     }));
   };
+
   const handleOpenAdd = () => {
-    const modalEle = addModalRef.current;
-    const bsModal = new Modal(modalEle);
-    bsModal.show();
+    setState({ ...state, addOpen: true });
   };
 
   const handleCloseAdd = () => {
-    const modalEle = addModalRef.current;
-    const bsModal = Modal.getInstance(modalEle);
-    bsModal.hide();
+    setState({ ...state, addOpen: false });
   };
 
-  const { foods, loading } = state;
+  const handleOpenEdit = async (e) => {
+    const { foods } = state;
+    const foodId = e.target.getAttribute('data-id');
+
+    // We get the edit target
+    const target = foods.find((food) => food._id === foodId);
+
+    setState({ ...state, target, editOpen: true });
+  };
+
+  const handleCloseEdit = () => {
+    setState({ ...state, target: null, editOpen: false });
+  };
+
+  const { foods, target, addOpen, editOpen, /* deleteOpen, */ loading } = state;
 
   return (
     <>
@@ -65,12 +104,26 @@ const MyFoods = () => {
           </button>
         </div>
       </div>
-      <FoodList foods={foods} loading={loading} />
-      <AddFood
-        modalRef={addModalRef}
-        handleRefresh={getFoods}
-        handleClose={handleCloseAdd}
+      <FoodList
+        foods={foods}
+        loading={loading}
+        handleOpenEdit={handleOpenEdit}
       />
+      {addOpen && (
+        <AddFood
+          modalRef={addModalRef}
+          handleRefresh={getFoods}
+          handleClose={handleCloseAdd}
+        />
+      )}
+      {editOpen && (
+        <EditFood
+          modalRef={editModalRef}
+          target={target}
+          handleRefresh={getFoods}
+          handleClose={handleCloseEdit}
+        />
+      )}
     </>
   );
 };
