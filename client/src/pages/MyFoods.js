@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import axios from 'axios';
 import Helmet from 'react-helmet';
-import { Modal } from 'bootstrap';
+import Modal from 'bootstrap/js/dist/modal';
 
 import { WEBSITE_NAME } from 'src/utils/brand';
 import FoodList from 'src/components/my-foods/FoodList';
