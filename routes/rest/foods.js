@@ -6,6 +6,7 @@ const {
   getFoods,
   addFood,
   editFood,
+  deleteFood,
   getAvailableFoods,
 } = require('../../controllers/foods');
 
@@ -38,5 +39,10 @@ router.get('/available', auth, getAvailableFoods);
 // @desc Edits a food
 // @access Private
 router.put('/:id', auth, editFood);
+
+// @route DELETE foods/:id
+// @desc Deletes a food
+// @access Private
+router.delete('/:id', auth, deleteFood);
 
 module.exports = router;

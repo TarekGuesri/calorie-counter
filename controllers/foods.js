@@ -154,3 +154,33 @@ exports.editFood = async (req, res) => {
     res.status(500).send('Server error');
   }
 };
+
+exports.deleteFood = async (req, res) => {
+  try {
+    let food = await Food.findOne({ _id: req.params.id, user: req.user.id });
+
+    if (!food) {
+      return res.status(404).send("Food doesn't exist");
+    }
+
+    // Getting user's consumption list to check if this food exists on it
+    let consumptionList = await ConsumptionList.findOne({ user: req.user.id });
+
+    if (consumptionList) {
+      // We delete the food from the consumption list if it exists
+      consumptionList.consumptions = consumptionList.consumptions.filter(
+        (consumption) => consumption.food.toString() !== food._id.toString()
+      );
+
+      await consumptionList.save();
+    }
+
+    // Deleting the food
+    await food.delete();
+
+    res.json('The food was deleted successfully');
+  } catch (error) {
+    errorLogger(req, 1, error);
+    res.status(500).send('Server error');
+  }
+};
