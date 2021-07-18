@@ -34,8 +34,11 @@ const foodSchema = new mongoose.Schema({
 });
 
 foodSchema.statics.addImage = async (foodId, imageFile) => {
+  // We use a random string so we can add it to the temporary file name to avoid sharp's bug of getting old images
+  let randomString = Math.random().toString(36).substring(7);
+
   // We create a temporary file for the image so we can resize it using sharp
-  const tmpPath = `uploads/images/foods/${foodId}-tmp.png`;
+  const tmpPath = `uploads/images/foods/${foodId}-${randomString}.png`;
   await imageFile.mv(tmpPath);
 
   // The image path that's going ot be used as a link
@@ -56,6 +59,17 @@ foodSchema.statics.addImage = async (foodId, imageFile) => {
 
     // now return the function's value with the file path
     return path;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+foodSchema.statics.removeImage = (foodId) => {
+  const path = `uploads/images/foods/${foodId}.png`;
+  try {
+    fs.unlinkSync(path);
+    console.log('image removed');
+    return;
   } catch (err) {
     console.error(err);
   }

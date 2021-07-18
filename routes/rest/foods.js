@@ -5,6 +5,7 @@ const auth = require('../../middleware/auth');
 const {
   getFoods,
   addFood,
+  editFood,
   getAvailableFoods,
 } = require('../../controllers/foods');
 
@@ -32,5 +33,10 @@ router.post(
 // @desc Gets available foods for the list (foods that belong to the user)
 // @access Private
 router.get('/available', auth, getAvailableFoods);
+
+// @route PUT foods/:id
+// @desc Edits a food
+// @access Private
+router.put('/:id', auth, editFood);
 
 module.exports = router;
