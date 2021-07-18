@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const UserMenu = ({ location, logout }) => {
+const UserMenu = ({ user, location, logout }) => {
   const display = location === 'collapse' ? ' d-lg-none' : ' d-none d-lg-block';
   return (
     <ul className={`navbar-nav ms-auto${display}`}>
@@ -19,7 +19,7 @@ const UserMenu = ({ location, logout }) => {
             alt="profile"
           />
           <span className="mx-2">
-            John Doe <i className="bi bi-chevron-down"></i>
+            {user.username} <i className="bi bi-chevron-down"></i>
           </span>
         </a>
         <ul
@@ -48,6 +48,7 @@ const UserMenu = ({ location, logout }) => {
 };
 
 UserMenu.propTypes = {
+  user: PropTypes.object.isRequired,
   location: PropTypes.oneOf(['collapse', 'outside']),
   logout: PropTypes.func.isRequired,
 };

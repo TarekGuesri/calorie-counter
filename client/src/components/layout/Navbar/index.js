@@ -9,7 +9,8 @@ import menu from 'src/utils/menu';
 import UserMenu from './UserMenu';
 import AuthButtons from './AuthButtons';
 
-const Navbar = ({ isAuthenticated, logout }) => {
+const Navbar = ({ user, isAuthenticated, logout }) => {
+  console.log(user);
   return (
     <nav className="navbar navbar-expand-lg navbar-light navbar-static-top">
       <div className="container-fluid box px-5">
@@ -46,7 +47,7 @@ const Navbar = ({ isAuthenticated, logout }) => {
             ))}
             {isAuthenticated ? (
               <li className="nav-item dropdown">
-                <UserMenu logout={logout} location="collapse" />
+                <UserMenu user={user} logout={logout} location="collapse" />
               </li>
             ) : (
               <AuthButtons location="collapse" />
@@ -54,7 +55,7 @@ const Navbar = ({ isAuthenticated, logout }) => {
           </ul>
         </div>
         {isAuthenticated ? (
-          <UserMenu logout={logout} location="outside" />
+          <UserMenu user={user} logout={logout} location="outside" />
         ) : (
           <AuthButtons location="outside" />
         )}
@@ -64,10 +65,12 @@ const Navbar = ({ isAuthenticated, logout }) => {
 };
 
 const mapStateToProps = (state) => ({
+  user: state.auth.user,
   isAuthenticated: state.auth.isAuthenticated,
 });
 
 Navbar.propTypes = {
+  user: PropTypes.object.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
   logout: PropTypes.func.isRequired,
 };
