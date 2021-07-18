@@ -136,6 +136,10 @@ button {
   border-radius: 4px;
   border-style: none;
 }
+.danger-button:hover {
+  color: #fff !important;
+  background: $first-accent-color;
+}
 .danger-button[disabled] {
   background: rgba($first-accent-color, 0.6) !important;
 }
@@ -218,6 +222,10 @@ input[type='checkbox'] {
 ----------------------------------------------------- */
 .alert-success {
   background-color: $primary-color;
+  color: #fff;
+}
+.alert-danger {
+  background-color: $first-accent-color;
   color: #fff;
 }
 

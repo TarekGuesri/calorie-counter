@@ -7,17 +7,18 @@ import { WEBSITE_NAME } from 'src/utils/brand';
 import FoodList from 'src/components/my-foods/FoodList';
 import AddFood from 'src/components/my-foods/AddFood';
 import EditFood from 'src/components/my-foods/EditFood';
+import DeleteFood from 'src/components/my-foods/DeleteFood';
 import 'src/styles/MyFoods.scss';
 
 const MyFoods = () => {
   // Modals refs
   const addModalRef = useRef();
   const editModalRef = useRef();
-  // const deleteModalRef = useRef();
+  const deleteModalRef = useRef();
 
   const [state, setState] = useState({
     foods: [],
-    target: null, // Edit or Remove modal target
+    target: null, // Edit or delete modal target
     addOpen: false,
     editOpen: false,
     deleteOpen: false,
@@ -47,6 +48,16 @@ const MyFoods = () => {
       bsModal.show();
     }
   }, [state.editOpen]);
+
+  // We use this to open the delete modal when deleteOpen state changes
+  useEffect(() => {
+    const { deleteOpen } = state;
+    if (deleteOpen) {
+      const modalEle = deleteModalRef.current;
+      const bsModal = new Modal(modalEle);
+      bsModal.show();
+    }
+  }, [state.deleteOpen]);
 
   const getFoods = async () => {
     setState({
@@ -85,7 +96,21 @@ const MyFoods = () => {
     setState({ ...state, target: null, editOpen: false });
   };
 
-  const { foods, target, addOpen, editOpen, /* deleteOpen, */ loading } = state;
+  const handleOpenDelete = async (e) => {
+    const { foods } = state;
+    const foodId = e.target.getAttribute('data-id');
+
+    // We get the delete target
+    const target = foods.find((food) => food._id === foodId);
+
+    setState({ ...state, target, deleteOpen: true });
+  };
+
+  const handleCloseDelete = () => {
+    setState({ ...state, target: null, deleteOpen: false });
+  };
+
+  const { foods, target, addOpen, editOpen, deleteOpen, loading } = state;
 
   return (
     <>
@@ -108,6 +133,7 @@ const MyFoods = () => {
         foods={foods}
         loading={loading}
         handleOpenEdit={handleOpenEdit}
+        handleOpenDelete={handleOpenDelete}
       />
       {addOpen && (
         <AddFood
@@ -121,8 +147,15 @@ const MyFoods = () => {
         <EditFood
           modalRef={editModalRef}
           target={target}
-          handleRefresh={getFoods}
           handleClose={handleCloseEdit}
+          handleGetFoods={getFoods}
+        />
+      )}
+      {deleteOpen && (
+        <DeleteFood
+          modalRef={deleteModalRef}
+          target={target}
+          handleClose={handleCloseDelete}
           handleGetFoods={getFoods}
         />
       )}
