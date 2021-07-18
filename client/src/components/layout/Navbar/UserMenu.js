@@ -29,17 +29,17 @@ const UserMenu = ({ user, location, logout }) => {
         >
           <li>
             <Link className="dropdown-item" to="/my-foods">
-              <i className="fas fa-cog"></i> My Foods
+              <i className="fas fa-utensils user-dropdown-icon"></i> My Foods
             </Link>
           </li>
           <li>
             <Link className="dropdown-item" to="/profile">
-              <i className="far fa-user"></i> Profile
+              <i className="far fa-user user-dropdown-icon"></i> Profile
             </Link>
           </li>
           <li>
             <a onClick={logout} className="dropdown-item" href="#!">
-              <i className="fas fa-sign-out-alt"></i> Logout
+              <i className="fas fa-sign-out-alt user-dropdown-icon"></i> Logout
             </a>
           </li>
         </ul>

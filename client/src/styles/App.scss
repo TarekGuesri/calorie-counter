@@ -82,6 +82,18 @@ nav {
   box-shadow: none;
 }
 
+.dropdown-item:hover {
+  color: #fff;
+  background-color: $primary-color;
+}
+.user-dropdown-icon {
+  color: $primary-color;
+  margin-right: 5px;
+}
+.dropdown-item:hover .user-dropdown-icon {
+  color: $secondary-color;
+}
+
 /* ---------------------------------------------------
     Main Layout Style
 ----------------------------------------------------- */
