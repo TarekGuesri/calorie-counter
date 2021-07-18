@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const UserMenu = ({ user, location, logout }) => {
   const display = location === 'collapse' ? ' d-lg-none' : ' d-none d-lg-block';
@@ -27,14 +28,14 @@ const UserMenu = ({ user, location, logout }) => {
           aria-labelledby="navbarDarkDropdownMenuLink"
         >
           <li>
-            <a className="dropdown-item" href="#">
-              <i className="fas fa-cog"></i> Setting
-            </a>
+            <Link className="dropdown-item" to="/my-foods">
+              <i className="fas fa-cog"></i> My Foods
+            </Link>
           </li>
           <li>
-            <a className="dropdown-item" href="#">
+            <Link className="dropdown-item" to="/profile">
               <i className="far fa-user"></i> Profile
-            </a>
+            </Link>
           </li>
           <li>
             <a onClick={logout} className="dropdown-item" href="#!">
