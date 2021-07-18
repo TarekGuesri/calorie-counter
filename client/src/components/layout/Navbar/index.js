@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
 import { logout } from 'src/actions/auth';
+import menu from 'src/utils/menu';
 
 import UserMenu from './UserMenu';
 import AuthButtons from './AuthButtons';
@@ -31,17 +32,18 @@ const Navbar = ({ isAuthenticated, logout }) => {
           id="navbar"
         >
           <ul className="navbar-nav">
-            <li className="nav-item">
-              <NavLink className="nav-link" aria-current="page" exact to="/">
-                Home
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" aria-current="page" to="my-foods">
-                My Foods
-              </NavLink>
-            </li>
-
+            {menu.map((item) => (
+              <li key={item.id} className="nav-item">
+                <NavLink
+                  className="nav-link"
+                  aria-current="page"
+                  exact={item.exact}
+                  to={item.link}
+                >
+                  {item.name}
+                </NavLink>
+              </li>
+            ))}
             {isAuthenticated ? (
               <li className="nav-item dropdown">
                 <UserMenu logout={logout} location="collapse" />
