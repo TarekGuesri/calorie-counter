@@ -68,7 +68,6 @@ foodSchema.statics.removeImage = (foodId) => {
   const path = `uploads/images/foods/${foodId}.png`;
   try {
     fs.unlinkSync(path);
-    console.log('image removed');
     return;
   } catch (err) {
     console.error(err);

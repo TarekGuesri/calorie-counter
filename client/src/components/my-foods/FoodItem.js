@@ -8,8 +8,9 @@ const FoodItem = ({ food, handleOpenEdit }) => {
       <td>
         <img
           src={
-            image ||
-            'https://assets.bonappetit.com/photos/597f6564e85ce178131a6475/master/w_1200,c_limit/0817-murray-mancini-dried-tomato-pie.jpg'
+            image
+              ? `${image}?${Date.now()}` // We use the date so we can force image re-render when user changes the image
+              : 'https://assets.bonappetit.com/photos/597f6564e85ce178131a6475/master/w_1200,c_limit/0817-murray-mancini-dried-tomato-pie.jpg'
           }
           className="img-fluid food-img"
           alt="Food Image"

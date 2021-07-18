@@ -6,8 +6,9 @@ import ActionModal from 'src/components/modals/ActionModal';
 import TextInput from 'src/components/forms/TextInput';
 import FileInput from 'src/components/forms/FileInput';
 import AsyncButton from 'src/components/buttons/AsyncButton';
+import CheckBox from 'src/components/forms/CheckBox';
 
-const EditFood = ({ modalRef, target, handleClose }) => {
+const EditFood = ({ modalRef, target, handleClose, handleGetFoods }) => {
   // We use the ref so we can reset the value of the file input since it is not a controlled component
   const imageInputRef = useRef();
 
@@ -17,6 +18,7 @@ const EditFood = ({ modalRef, target, handleClose }) => {
   const [state, setState] = useState({
     name: target.name,
     caloriesPerPortion: target.caloriesPerPortion,
+    replaceCurrentImage: false,
     image: null,
     loading: false,
     errors: [],
@@ -36,6 +38,13 @@ const EditFood = ({ modalRef, target, handleClose }) => {
     setState({ ...state, [e.target.name]: e.target.value });
   };
 
+  const handleCheck = async (e) => {
+    setState((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.checked,
+    }));
+  };
+
   const handleSetImage = (image) => {
     setState({ ...state, image });
   };
@@ -48,19 +57,22 @@ const EditFood = ({ modalRef, target, handleClose }) => {
   const handleEditFood = async (e) => {
     e.preventDefault();
     setState({ ...state, loading: true, errors: [] });
-    const { name, caloriesPerPortion, image } = state;
+    const { name, caloriesPerPortion, image, replaceCurrentImage } = state;
 
     // Creating a FormData object so we can append the image file to it
     const formData = new FormData();
 
     formData.append('name', name);
     formData.append('caloriesPerPortion', caloriesPerPortion);
+    if (replaceCurrentImage) {
+      formData.append('replaceCurrentImage', replaceCurrentImage);
+    }
     if (image) {
       formData.append('image', image, image.name);
     }
 
     try {
-      const res = await axios.post('foods', formData, {
+      const res = await axios.put(`foods/${target._id}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -70,12 +82,16 @@ const EditFood = ({ modalRef, target, handleClose }) => {
       setState((prevState) => ({
         ...prevState,
         loading: false,
-        name: '',
-        caloriesPerPortion: '',
         image: null,
+        // replaceCurrentImage: false,
         successMessage: res.data,
       }));
-      imageInputRef.current.value = '';
+
+      if (imageInputRef.current) {
+        imageInputRef.current.value = '';
+      }
+
+      handleGetFoods();
 
       // We also hide the success message after few seconds
       messageTimerRef.current = setTimeout(() => {
@@ -85,6 +101,7 @@ const EditFood = ({ modalRef, target, handleClose }) => {
         }));
       }, 6 * 1000);
     } catch (error) {
+      console.log(error);
       const {
         response: {
           data: { errors },
@@ -97,13 +114,12 @@ const EditFood = ({ modalRef, target, handleClose }) => {
   const {
     name,
     caloriesPerPortion,
+    replaceCurrentImage,
     image,
     loading,
     successMessage,
     errors,
   } = state;
-
-  console.log(target);
 
   return (
     <ActionModal
@@ -115,7 +131,7 @@ const EditFood = ({ modalRef, target, handleClose }) => {
           <button
             className="primary-button btn-lg rounded-pill ms-0 ms-sm-4"
             type="button"
-            disabled={!image}
+            disabled={!image || !replaceCurrentImage}
             onClick={handleEmptyImage}
           >
             Empty Image
@@ -153,15 +169,26 @@ const EditFood = ({ modalRef, target, handleClose }) => {
           onChange={handleOnChange}
         />
 
-        <FileInput
-          name="image"
-          label="Upload an image"
-          handleChange={handleSetImage}
-          reference={imageInputRef}
-          errors={errors}
-          accept="image/png, image/jpg, image/jpeg"
-        />
+        <div className="mt-4 mb-2 text-start">
+          <CheckBox
+            name="replaceCurrentImage"
+            text="Replace current image"
+            checked={replaceCurrentImage}
+            onChange={handleCheck}
+          />
+        </div>
 
+        {replaceCurrentImage && (
+          <FileInput
+            name="image"
+            label="Upload an image"
+            handleChange={handleSetImage}
+            reference={imageInputRef}
+            errors={errors}
+            accept="image/png, image/jpg, image/jpeg"
+            disabled={!replaceCurrentImage}
+          />
+        )}
         {successMessage && (
           <div className="alert alert-success" role="alert">
             {successMessage}
@@ -176,6 +203,7 @@ EditFood.propTypes = {
   modalRef: PropTypes.object.isRequired,
   target: PropTypes.object.isRequired,
   handleClose: PropTypes.func.isRequired,
+  handleGetFoods: PropTypes.func.isRequired,
 };
 
 export default EditFood;
