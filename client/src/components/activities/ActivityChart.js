@@ -16,7 +16,7 @@ const data = {
       data: [133, 288, 108, 288, 216, 281],
       backgroundColor: '#55973f',
       borderRadius: 25,
-      barPercentage: 0.4,
+      barPercentage: 0.6,
     },
   ],
 };
