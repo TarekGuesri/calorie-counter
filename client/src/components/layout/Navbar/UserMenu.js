@@ -37,7 +37,12 @@ const UserMenu = ({ user, location, logout }) => {
           </li>
           <li>
             <Link className="dropdown-item" to="/profile">
-              <i className="far fa-user user-dropdown-icon"></i> Profile
+              <i className="fa fa-user user-dropdown-icon"></i> Profile
+            </Link>
+          </li>
+          <li>
+            <Link className="dropdown-item" to="/settings">
+              <i className="fas fa-cog user-dropdown-icon"></i>Settings
             </Link>
           </li>
           <li>

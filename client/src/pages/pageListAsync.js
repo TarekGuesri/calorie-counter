@@ -10,6 +10,7 @@ const TodayCalories = lazy(() => import('./TodayCalories'));
 const MyFoods = lazy(() => import('./MyFoods'));
 const Tips = lazy(() => import('./Tips'));
 const Activities = lazy(() => import('./Activities'));
+const Settings = lazy(() => import('./Settings'));
 const NotFound = lazy(() => import('./NotFound'));
 
 export const HomePage = () => (
@@ -50,6 +51,11 @@ export const TipsPage = () => (
 export const ActivitiesPage = () => (
   <Suspense fallback={<PageSpinner />}>
     <Activities />
+  </Suspense>
+);
+export const SettingsPage = () => (
+  <Suspense fallback={<PageSpinner />}>
+    <Settings />
   </Suspense>
 );
 export const NotFoundPage = () => (

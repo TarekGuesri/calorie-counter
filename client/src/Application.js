@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 
 import {
   ProfilePage,
+  SettingsPage,
   TodayCaloriesPage,
   MyFoodsPage,
   ActivitiesPage,
@@ -19,6 +20,7 @@ const Application = () => {
         <Route path="/activities" component={ActivitiesPage} />
         <Route path="/tips" component={TipsPage} />
         <PrivateRoute path="/profile" component={ProfilePage} />
+        <PrivateRoute path="/settings" component={SettingsPage} />
         <PrivateRoute path="/today" component={TodayCaloriesPage} />
         <PrivateRoute path="/my-foods" component={MyFoodsPage} />
         <Route component={NotFoundPage} />
