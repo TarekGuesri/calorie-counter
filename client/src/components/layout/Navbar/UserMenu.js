@@ -28,6 +28,12 @@ const UserMenu = ({ user, location, logout }) => {
           aria-labelledby="navbarDarkDropdownMenuLink"
         >
           <li>
+            <Link className="dropdown-item" to="/today">
+              <i className="fas fa-list user-dropdown-icon"></i>{' '}
+              {"Today's Calories"}
+            </Link>
+          </li>
+          <li>
             <Link className="dropdown-item" to="/my-foods">
               <i className="fas fa-utensils user-dropdown-icon"></i> My Foods
             </Link>
