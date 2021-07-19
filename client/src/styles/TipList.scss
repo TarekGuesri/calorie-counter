@@ -1,0 +1,6 @@
+@import 'config';
+@import 'utilities';
+
+.tip-list li::marker {
+  color: $primary-color;
+}
