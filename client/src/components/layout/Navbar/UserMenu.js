@@ -15,10 +15,7 @@ const UserMenu = ({ user, location, logout }) => {
           data-bs-toggle="dropdown"
           aria-expanded="false"
         >
-          <img
-            src="https://randomuser.me/api/portraits/men/10.jpg"
-            alt="profile"
-          />
+          <img src="images/default-profile-picture.png" alt="profile" />
           <span className="mx-2">
             {user.username} <i className="bi bi-chevron-down"></i>
           </span>

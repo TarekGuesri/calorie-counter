@@ -15,10 +15,7 @@ const ConsumptionListItem = ({
         <div className="display-flex align-center">
           <div className="img-food">
             <img
-              src={
-                image ||
-                'https://assets.bonappetit.com/photos/597f6564e85ce178131a6475/master/w_1200,c_limit/0817-murray-mancini-dried-tomato-pie.jpg'
-              }
+              src={image || 'images/default-food-picture.png'}
               alt=""
               className="mCS_img_loaded"
             />

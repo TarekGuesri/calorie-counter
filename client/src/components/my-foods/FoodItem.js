@@ -10,7 +10,7 @@ const FoodItem = ({ food, handleOpenEdit, handleOpenDelete }) => {
           src={
             image
               ? `${image}?${Date.now()}` // We use the date so we can force image re-render when user changes the image
-              : 'https://assets.bonappetit.com/photos/597f6564e85ce178131a6475/master/w_1200,c_limit/0817-murray-mancini-dried-tomato-pie.jpg'
+              : 'images/default-food-picture.png'
           }
           className="img-fluid food-img"
           alt="Food Image"
@@ -28,7 +28,12 @@ const FoodItem = ({ food, handleOpenEdit, handleOpenDelete }) => {
         >
           <i className="fas fa-pen action-icon"></i>
         </a>
-        <a href="#" className="text-danger p-3" data-id={_id} onClick={handleOpenDelete}>
+        <a
+          href="#"
+          className="text-danger p-3"
+          data-id={_id}
+          onClick={handleOpenDelete}
+        >
           <i className="fas fa-trash-alt action-icon"></i>
         </a>
       </td>
