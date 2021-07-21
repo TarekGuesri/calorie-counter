@@ -1,1 +1,1 @@
-export const WEBSITE_NAME = 'CaloriesCounter';
+export const WEBSITE_NAME = 'CalorieCounter';

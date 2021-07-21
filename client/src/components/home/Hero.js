@@ -8,7 +8,7 @@ const Hero = () => {
         <div className="container text-center my-md-0 h-100">
           <h1 className="display-4 pt-14 mx-auto">Control your weight</h1>
           <p className="my-5 mx-auto">
-            With CaloriesCounter, you can keep a track of the number of calories
+            With CalorieCounter, you can keep a track of the number of calories
             you had in day to help you know what you need in order to gain or
             lose weight.
           </p>
