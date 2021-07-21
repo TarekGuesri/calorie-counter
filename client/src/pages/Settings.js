@@ -28,6 +28,17 @@ const Settings = ({ user, loadUser }) => {
   const handleSaveSettings = async (e) => {
     e.preventDefault();
     setState({ ...state, errors: [], loading: true });
+
+    if (password !== confirmPassword) {
+      setState((prevState) => ({
+        ...prevState,
+        errors: [{ param: 'confirmPassword', msg: 'Passwords do not match' }],
+        loading: false,
+      }));
+
+      return;
+    }
+
     console.log('handleSaveSettings');
   };
 
@@ -72,16 +83,16 @@ const Settings = ({ user, loadUser }) => {
           value={oldPassword}
           label="Old Password"
           type="password"
-          required
+          required={confirmPassword || password}
           errors={errors}
           onChange={handleOnChange}
         />
         <TextInput
           name="password"
           value={password}
-          label="Password"
+          label="New Password"
           type="password"
-          required
+          required={confirmPassword || oldPassword}
           errors={errors}
           onChange={handleOnChange}
         />
@@ -90,7 +101,7 @@ const Settings = ({ user, loadUser }) => {
           value={confirmPassword}
           label="Confirm Password"
           type="password"
-          required
+          required={confirmPassword || password}
           errors={errors}
           onChange={handleOnChange}
         />
