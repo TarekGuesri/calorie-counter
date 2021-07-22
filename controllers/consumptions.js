@@ -9,12 +9,14 @@ exports.getConsumptionList = async (req, res) => {
     user: req.user.id,
   }).populate('consumptions.food', ['name', 'caloriesPerPortion', 'image']);
 
-  const consumptions = consumptionList.consumptions.map((consumption) => ({
-    ...consumption.food.toObject(),
-    quantity: consumption.quantity,
-    calories: consumption.food.caloriesPerPortion * consumption.quantity,
-    id: consumption.id,
-  }));
+  const consumptions = !consumptionList
+    ? []
+    : consumptionList.consumptions.map((consumption) => ({
+        ...consumption.food.toObject(),
+        quantity: consumption.quantity,
+        calories: consumption.food.caloriesPerPortion * consumption.quantity,
+        id: consumption.id,
+      }));
 
   res.json(consumptions);
 };
