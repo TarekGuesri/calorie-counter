@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
@@ -11,6 +11,9 @@ import AsyncButton from 'src/components/buttons/AsyncButton';
 import { loadUser } from 'src/actions/auth';
 
 const Settings = ({ user, loadUser }) => {
+  // We use this ref so we can clear the success message's timeout on component unmounting
+  const messageTimerRef = useRef(null);
+
   const [state, setState] = useState({
     username: user?.username || '',
     email: user?.email || '',
@@ -18,8 +21,18 @@ const Settings = ({ user, loadUser }) => {
     confirmPassword: '',
     oldPassword: '',
     loading: false,
+    successMessage: '',
     errors: [],
   });
+
+  useEffect(() => {
+    // Clearning the timeout
+    return () => {
+      if (messageTimerRef.current) {
+        clearTimeout(messageTimerRef.current);
+      }
+    };
+  }, []);
 
   const handleOnChange = async (e) => {
     setState({ ...state, [e.target.name]: e.target.value });
@@ -27,7 +40,9 @@ const Settings = ({ user, loadUser }) => {
 
   const handleSaveSettings = async (e) => {
     e.preventDefault();
-    setState({ ...state, errors: [], loading: true });
+    setState({ ...state, successMessage: '', errors: [], loading: true });
+
+    const { username, email, password, confirmPassword, oldPassword } = state;
 
     if (password !== confirmPassword) {
       setState((prevState) => ({
@@ -39,7 +54,35 @@ const Settings = ({ user, loadUser }) => {
       return;
     }
 
-    console.log('handleSaveSettings');
+    const formData = { username, email, password, oldPassword };
+
+    try {
+      const res = await axios.put('auth/self', formData);
+
+      setState((prevState) => ({
+        ...prevState,
+        successMessage: res.data,
+        loading: false,
+      }));
+
+      // We load the user so we get the updated data
+      loadUser();
+
+      // We also hide the success message after few seconds
+      messageTimerRef.current = setTimeout(() => {
+        setState((prevState) => ({
+          ...prevState,
+          successMessage: '',
+        }));
+      }, 6 * 1000);
+    } catch (error) {
+      const {
+        response: {
+          data: { errors },
+        },
+      } = error;
+      setState((prevState) => ({ ...prevState, errors, loading: false }));
+    }
   };
 
   const {
@@ -49,6 +92,7 @@ const Settings = ({ user, loadUser }) => {
     confirmPassword,
     oldPassword,
     loading,
+    successMessage,
     errors,
   } = state;
 
@@ -105,6 +149,12 @@ const Settings = ({ user, loadUser }) => {
           errors={errors}
           onChange={handleOnChange}
         />
+
+        {successMessage && (
+          <div className="alert alert-success" role="alert">
+            {successMessage}
+          </div>
+        )}
         <AsyncButton
           type="submit"
           text="Save"
