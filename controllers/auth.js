@@ -15,26 +15,28 @@ exports.registerUser = async (req, res) => {
   const { username, email, password } = req.body;
 
   try {
+    // Checking if the email is already in use
     const emailAlreadyExists = await User.findOne({ email });
     if (emailAlreadyExists) {
       return res.status(400).json({
         errors: [
           {
             param: 'email',
-            msg: 'Email already exists',
+            msg: 'Email already in use',
             value: '',
           },
         ],
       });
     }
 
+    // Checking if the username is already in use
     let user = await User.findOne({ username });
     if (user) {
       return res.status(400).json({
         errors: [
           {
             param: 'username',
-            msg: 'Username already exists',
+            msg: 'Username already in use',
             value: '',
           },
         ],
@@ -151,4 +153,102 @@ exports.updateProfile = async (req, res) => {
   }
 
   res.json('Profile updated');
+};
+
+exports.updateSelf = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  // Checking password's length
+  const { password } = req.body;
+  if (password && password.length < 6) {
+    return res.status(400).json({
+      errors: [
+        {
+          param: 'password',
+          msg: 'Passwrod must be at least 6 characters',
+          value: '',
+        },
+      ],
+    });
+  }
+
+  const { username, email } = req.body;
+
+  try {
+    // Checking if user in use
+    let user = await User.findById(req.user.id);
+    if (!user) {
+      return res.status(404).json({
+        message: 'User not found',
+      });
+    }
+
+    // Checking if the email is already in use
+    const emailAlreadyExists = await User.findOne({
+      email,
+      _id: { $ne: user.id },
+    });
+    if (emailAlreadyExists) {
+      return res.status(400).json({
+        errors: [
+          {
+            param: 'email',
+            msg: 'Email already in use',
+            value: '',
+          },
+        ],
+      });
+    }
+
+    // Checking if the username is already in use
+    const usernameAlreadyExists = await User.findOne({
+      username,
+      _id: { $ne: user.id },
+    });
+    if (usernameAlreadyExists) {
+      return res.status(400).json({
+        errors: [
+          {
+            param: 'username',
+            msg: 'Username already in use',
+            value: '',
+          },
+        ],
+      });
+    }
+
+    // If user entered a password, we change it
+    if (password) {
+      const { oldPassword } = req.body;
+
+      // Checking if the old password matches
+      const isMatch = await bcrypt.compare(oldPassword, user.password);
+      if (!isMatch) {
+        return res.status(400).json({
+          errors: [
+            { param: 'oldPassword', msg: 'Old password is not correct' },
+          ],
+        });
+      }
+
+      // Hashing the password and changing it
+      const salt = await bcrypt.genSalt(10);
+      user.password = await bcrypt.hash(password, salt);
+    }
+
+    // Changing user info
+    user.username = username;
+    user.email = email;
+
+    // Saving the user
+    await user.save();
+
+    res.json('User data changed successfully');
+  } catch (error) {
+    errorLogger(req, 2, error);
+    res.status(500).send('Server error');
+  }
 };

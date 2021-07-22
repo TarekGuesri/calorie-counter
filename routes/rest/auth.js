@@ -7,6 +7,7 @@ const {
   loginUser,
   checkSelf,
   updateProfile,
+  updateSelf,
 } = require('../../controllers/auth');
 
 const router = express.Router();
@@ -53,6 +54,17 @@ router.put(
     'female',
   ]),
   updateProfile
+);
+
+// @route PUT auth/self
+// @desc Edits user information
+// @access Private
+router.put(
+  '/self',
+  auth,
+  check('username', 'Username is required').notEmpty(),
+  check('email', 'Please include a valid email').isEmail(),
+  updateSelf
 );
 
 module.exports = router;
