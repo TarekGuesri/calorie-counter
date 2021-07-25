@@ -14,8 +14,8 @@ import { login } from 'src/actions/auth';
 
 const Login = ({ isAuthenticated, login }) => {
   const [state, setState] = useState({
-    email: 'test@mail.com',
-    password: '123',
+    email: '',
+    password: '',
     remember: false,
     loading: false,
     errors: [],

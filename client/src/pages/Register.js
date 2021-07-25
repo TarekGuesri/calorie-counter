@@ -12,10 +12,10 @@ import 'src/styles/Auth.scss';
 
 const Register = ({ isAuthenticated }) => {
   const [state, setState] = useState({
-    username: 'john',
-    email: 'test@mail.com',
-    password: '123',
-    confirmPassword: '123',
+    username: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
     loading: false,
     errors: [],
   });
