@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 
 import Navbar from 'src/components/layout/Navbar';
+import Footer from 'src/components/layout/Footer';
 import Application from './Application';
 import { HomePage, RegisterPage, LoginPage } from 'src/pages/pageListAsync';
 import PageSpinner from 'src/components/layout/PageSpinner';
@@ -44,6 +45,7 @@ function App({ loading, loadUser, logout }) {
         <Route path="/register" component={RegisterPage} />
         <Route component={Application} />
       </Switch>
+      <Footer />
     </Router>
   );
 }
