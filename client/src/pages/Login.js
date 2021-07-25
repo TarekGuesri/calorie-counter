@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import axios from 'axios';
@@ -94,6 +94,15 @@ const Login = ({ isAuthenticated, login }) => {
             checked={remember}
             onChange={handleCheck}
           />
+        </div>
+
+        <div className="my-4">
+          <p>
+            If you already have an account, sign up{' '}
+            <Link style={{ fontWeight: '400' }} to="/register">
+              here
+            </Link>
+          </p>
         </div>
 
         <AsyncButton
