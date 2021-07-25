@@ -1,7 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-const Hero = () => {
+const Hero = ({ isAuthenticated }) => {
   return (
     <section id="hero">
       <div className="jumbotron jumbotron-fluid">
@@ -17,7 +19,7 @@ const Hero = () => {
             to="/today"
             role="button"
           >
-            Get Started
+            {isAuthenticated ? 'Consumption List' : 'Get Started'}
           </Link>
         </div>
       </div>
@@ -25,4 +27,12 @@ const Hero = () => {
   );
 };
 
-export default Hero;
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+Hero.propTypes = {
+  isAuthenticated: PropTypes.bool.isRequired,
+};
+
+export default connect(mapStateToProps)(Hero);

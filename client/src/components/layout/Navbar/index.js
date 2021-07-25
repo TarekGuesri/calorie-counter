@@ -10,7 +10,6 @@ import UserMenu from './UserMenu';
 import AuthButtons from './AuthButtons';
 
 const Navbar = ({ user, isAuthenticated, logout }) => {
-  console.log(user);
   return (
     <nav className="navbar navbar-expand-lg navbar-light navbar-static-top">
       <div className="container-fluid box">
