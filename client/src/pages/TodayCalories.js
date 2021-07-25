@@ -8,9 +8,9 @@ const TodayCalories = () => {
   return (
     <>
       <Helmet>
-        <title>{`${WEBSITE_NAME} - Today's Calories`}</title>
+        <title>{`${WEBSITE_NAME} - Consumption List`}</title>
       </Helmet>
-      <h3 className="primary-text"> {"Today's Calories"}</h3>
+      <h3 className="primary-text"> {'Consumption List'}</h3>
       <ConsumptionList />
     </>
   );

@@ -47,7 +47,7 @@ const ConsumptionList = ({
         <AddConsumption addConsumption={addConsumption} />
         <div className="row">
           <div className="col-lg-8">
-            <div className="main-heading">Consumption List</div>
+            <div className="main-heading">Consumptions</div>
             <div className="table-list table-responsive">
               <table>
                 <thead>

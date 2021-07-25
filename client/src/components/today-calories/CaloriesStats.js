@@ -21,7 +21,7 @@ const CaloriesStats = ({ user: { profile }, totalCalories }) => {
             </tr>
           )}
           <tr className="total-row border-top border-secondary">
-            <td>{"Today's calories"}</td>
+            <td>{'Total Calories'}</td>
             <td className="price-total">{totalCalories}</td>
           </tr>
         </tbody>

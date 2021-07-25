@@ -27,7 +27,7 @@ const UserMenu = ({ user, location, logout }) => {
           <li>
             <Link className="dropdown-item" to="/today">
               <i className="fas fa-list user-dropdown-icon"></i>{' '}
-              {"Today's Calories"}
+              {'Consumption List'}
             </Link>
           </li>
           <li>
