@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
@@ -42,16 +43,18 @@ function App({ loading, loadUser, logout }) {
   }
 
   return (
-    <Router>
-      <Navbar />
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/login" component={LoginPage} />
-        <Route path="/register" component={RegisterPage} />
-        <Route component={Application} />
-      </Switch>
-      <Footer />
-    </Router>
+    <HelmetProvider>
+      <Router>
+        <Navbar />
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/login" component={LoginPage} />
+          <Route path="/register" component={RegisterPage} />
+          <Route component={Application} />
+        </Switch>
+        <Footer />
+      </Router>
+    </HelmetProvider>
   );
 }
 

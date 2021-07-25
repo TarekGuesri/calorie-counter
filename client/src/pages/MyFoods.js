@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import axios from 'axios';
-import Helmet from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import Modal from 'bootstrap/js/dist/modal';
 
 import { WEBSITE_NAME } from 'src/utils/brand';
