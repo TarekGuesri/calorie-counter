@@ -9,7 +9,7 @@ const Feature = ({ feature }) => {
       <div className="feature-icon bg-gradient">
         <i className={`fas ${icon}`}></i>
       </div>
-      <h2>{title}</h2>
+      <h3>{title}</h3>
       <p>{description}</p>
     </div>
   );

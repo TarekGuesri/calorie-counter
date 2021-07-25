@@ -1,21 +1,21 @@
 const dummyFeatures = [
   {
-    title: 'Feature 1',
-    icon: 'fa-utensils',
+    title: 'Consumption',
+    icon: 'fa-list',
     description:
-      'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati, vel! At hic porro sit reiciendis?',
+      'You can use your consumption list to get the count of how many calories you had during your day test',
   },
   {
-    title: 'Feature 2',
+    title: 'Food List',
     icon: 'fa-utensils',
     description:
-      'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati, vel! At hic porro sit reiciendis?',
+      'The food list lets you store foods with their calories on your account so it makes it easier to add them to your list',
   },
   {
-    title: 'Feature 3',
-    icon: 'fa-utensils',
+    title: 'Profile',
+    icon: 'fa-user',
     description:
-      'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati, vel! At hic porro sit reiciendis?',
+      'You can have a profile that has your information in order to give you guidlines for gaining or losing weight',
   },
 ];
 export default dummyFeatures;
