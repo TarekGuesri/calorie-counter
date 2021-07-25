@@ -13,7 +13,7 @@ const Navbar = ({ user, isAuthenticated, logout }) => {
   console.log(user);
   return (
     <nav className="navbar navbar-expand-lg navbar-light navbar-static-top">
-      <div className="container-fluid box px-5">
+      <div className="container-fluid box">
         <NavLink className="navbar-brand" to="/">
           CalorieCounter
         </NavLink>

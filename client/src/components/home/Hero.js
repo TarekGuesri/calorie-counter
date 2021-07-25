@@ -5,7 +5,7 @@ const Hero = () => {
   return (
     <section id="hero">
       <div className="jumbotron jumbotron-fluid">
-        <div className="container text-center my-md-0 h-100">
+        <div className="container box text-center my-md-0 h-100">
           <h1 className="display-4 pt-14 mx-auto">Control your weight</h1>
           <p className="my-5 mx-auto">
             With CalorieCounter, you can keep a track of the number of calories
