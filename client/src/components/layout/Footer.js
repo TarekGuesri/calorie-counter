@@ -3,7 +3,7 @@ import React from 'react';
 const Footer = () => {
   return (
     <footer id="footer">
-      <div className="container p-5">
+      <div className="container p-3">
         <div className="row">
           <div className="col text-center">
             <p className="copyrights">
@@ -13,7 +13,11 @@ const Footer = () => {
         </div>
         <div className="row">
           <div className="col text-center">
-            <a href="#" target="_blank">
+            <a
+              href="https://github.com/TarekGuesri/calorie-counter"
+              rel="noreferrer"
+              target="_blank"
+            >
               <i className="fab fa-github"></i> Github
             </a>
           </div>
