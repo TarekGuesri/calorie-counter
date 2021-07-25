@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
@@ -16,6 +16,9 @@ const genderOptions = [
 ];
 
 const Profile = ({ user: { profile }, loadUser }) => {
+  // We use this ref so we can clear the success message's timeout on component unmounting
+  const messageTimerRef = useRef(null);
+
   const [state, setState] = useState({
     weight: profile?.weight || '',
     height: profile?.height || '',
@@ -23,7 +26,17 @@ const Profile = ({ user: { profile }, loadUser }) => {
     gender: profile?.gender || 'male',
     loading: false,
     errors: [],
+    successMessage: '',
   });
+
+  useEffect(() => {
+    // Clearning the timeout
+    return () => {
+      if (messageTimerRef.current) {
+        clearTimeout(messageTimerRef.current);
+      }
+    };
+  }, []);
 
   const handleOnChange = async (e) => {
     setState({ ...state, [e.target.name]: e.target.value });
@@ -31,15 +44,30 @@ const Profile = ({ user: { profile }, loadUser }) => {
 
   const handleSaveProfile = async (e) => {
     e.preventDefault();
-    setState({ ...state, errors: [], loading: true });
+    setState({ ...state, errors: [], loading: true, successMessage: '' });
     const { weight, height, age, gender } = state;
 
     const formData = { weight, height, age, gender };
     try {
-      await axios.put('auth/profile', formData);
+      const res = await axios.put('auth/profile', formData);
+
       // We load the user so we get the updated profile
       loadUser();
-      setState((prevState) => ({ ...prevState, errors: [], loading: false }));
+
+      setState((prevState) => ({
+        ...prevState,
+        errors: [],
+        loading: false,
+        successMessage: res.data,
+      }));
+
+      // We also hide the success message after few seconds
+      messageTimerRef.current = setTimeout(() => {
+        setState((prevState) => ({
+          ...prevState,
+          successMessage: '',
+        }));
+      }, 6 * 1000);
     } catch (error) {
       const {
         response: {
@@ -50,7 +78,15 @@ const Profile = ({ user: { profile }, loadUser }) => {
     }
   };
 
-  const { weight, height, age, gender, loading, errors } = state;
+  const {
+    weight,
+    height,
+    age,
+    gender,
+    loading,
+    errors,
+    successMessage,
+  } = state;
 
   return (
     <>
@@ -96,6 +132,12 @@ const Profile = ({ user: { profile }, loadUser }) => {
           radioOptions={genderOptions}
           onChange={handleOnChange}
         />
+
+        {successMessage && (
+          <div className="alert alert-success mt-3" role="alert">
+            {successMessage}
+          </div>
+        )}
 
         <AsyncButton
           type="submit"
