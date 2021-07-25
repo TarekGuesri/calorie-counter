@@ -2,7 +2,6 @@ import React, { Suspense, lazy } from 'react';
 
 import PageSpinner from 'src/components/layout/PageSpinner';
 
-const Home = lazy(() => import('./Home'));
 const Login = lazy(() => import('./Login'));
 const Register = lazy(() => import('./Register'));
 const Profile = lazy(() => import('./Profile'));
@@ -13,11 +12,6 @@ const Activities = lazy(() => import('./Activities'));
 const Settings = lazy(() => import('./Settings'));
 const NotFound = lazy(() => import('./NotFound'));
 
-export const HomePage = () => (
-  <Suspense fallback={<PageSpinner />}>
-    <Home />
-  </Suspense>
-);
 export const LoginPage = () => (
   <Suspense fallback={<PageSpinner />}>
     <Login />

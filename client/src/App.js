@@ -7,7 +7,8 @@ import axios from 'axios';
 import Navbar from 'src/components/layout/Navbar';
 import Footer from 'src/components/layout/Footer';
 import Application from './Application';
-import { HomePage, RegisterPage, LoginPage } from 'src/pages/pageListAsync';
+import { RegisterPage, LoginPage } from 'src/pages/pageListAsync';
+import Home from 'src/pages/Home';
 import PageSpinner from 'src/components/layout/PageSpinner';
 import setAuthToken from 'src/utils/setAuthToken';
 import { loadUser, logout } from 'src/actions/auth';
@@ -33,14 +34,18 @@ function App({ loading, loadUser, logout }) {
   }, []);
 
   if (loading) {
-    return <PageSpinner />;
+    return (
+      <div className="" style={{ marginTop: '46vh' }}>
+        <PageSpinner />
+      </div>
+    );
   }
 
   return (
     <Router>
       <Navbar />
       <Switch>
-        <Route exact path="/" component={HomePage} />
+        <Route exact path="/" component={Home} />
         <Route path="/login" component={LoginPage} />
         <Route path="/register" component={RegisterPage} />
         <Route component={Application} />
