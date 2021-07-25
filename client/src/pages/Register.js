@@ -9,8 +9,9 @@ import { WEBSITE_NAME } from 'src/utils/brand';
 import TextInput from 'src/components/forms/TextInput';
 import AsyncButton from 'src/components/buttons/AsyncButton';
 import 'src/styles/Auth.scss';
+import { login } from 'src/actions/auth';
 
-const Register = ({ isAuthenticated }) => {
+const Register = ({ isAuthenticated, login }) => {
   const [state, setState] = useState({
     username: '',
     email: '',
@@ -43,8 +44,7 @@ const Register = ({ isAuthenticated }) => {
     try {
       const res = await axios.post('auth/register', formData);
 
-      // TODO : Log in then redirect to today's list
-      console.log(res);
+      login(res.data);
       setState((prevState) => ({
         ...prevState,
         loading: false,
@@ -139,6 +139,7 @@ const mapStateToProps = (state) => ({
 
 Register.propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
+  login: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps)(Register);
+export default connect(mapStateToProps, { login })(Register);
