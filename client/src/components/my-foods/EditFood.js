@@ -101,7 +101,6 @@ const EditFood = ({ modalRef, target, handleClose, handleGetFoods }) => {
         }));
       }, 6 * 1000);
     } catch (error) {
-      console.log(error);
       const {
         response: {
           data: { errors },

@@ -1,9 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 const Footer = () => {
+  const [isHome, setIsHome] = useState(true);
+  const history = useHistory();
+
+  useEffect(() => {
+    return history.listen((location) => {
+      if (location.pathname === '/') {
+        setIsHome(true);
+      } else {
+        setIsHome(false);
+      }
+    });
+  }, [history]);
+
   return (
-    <footer id="footer">
-      <div className="container p-3">
+    <footer className={`footer${isHome ? ' home-footer' : ''}`}>
+      <div className="container p-4">
         <div className="row">
           <div className="col text-center">
             <p className="copyrights">
