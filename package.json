@@ -9,7 +9,8 @@
     "client": "npm start --prefix client",
     "client:install": "npm install --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "postinstall": "(cd client && yarn);"
+    "postinstall": "(cd client && yarn);",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "author": "Tariq Lamin Guesri",
   "license": "ISC",
