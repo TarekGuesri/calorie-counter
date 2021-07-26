@@ -47,6 +47,9 @@ if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
+// Define Routes
+app.use('/rest', require('./routes/rest'));
+
 // Serve static assets in production
 if (process.env.NODE_ENV === 'production') {
   // Set static folder
@@ -56,9 +59,6 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
   );
 }
-
-// Define Routes
-app.use('/rest', require('./routes/rest'));
 
 const PORT = process.env.PORT || 5000;
 
