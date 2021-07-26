@@ -2,11 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 const Footer = () => {
-  const [isHome, setIsHome] = useState(true);
+  const initialValue = window.location.pathname === '/';
+
+  const [isHome, setIsHome] = useState(initialValue);
   const history = useHistory();
 
   useEffect(() => {
     return history.listen((location) => {
+      console.log(location.pathname);
       if (location.pathname === '/') {
         setIsHome(true);
       } else {
