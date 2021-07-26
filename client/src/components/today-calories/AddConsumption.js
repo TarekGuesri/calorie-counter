@@ -18,7 +18,10 @@ const AddConsumption = ({ addConsumption }) => {
         ...state,
         foods: res.data,
         loading: false,
-        food: { id: '', value: '' },
+        food: {
+          id: '',
+          value: res.data.length > 0 ? '' : 'Your foods list is empty',
+        },
       });
     };
     fetchData();
@@ -46,7 +49,6 @@ const AddConsumption = ({ addConsumption }) => {
       (if you want to add a new food click <Link to="/my-foods">here</Link> )
       <br />
       <ReactAutocomplete
-        className="awdaw"
         items={
           // We map the foods for ReactAutocomplete
           foods.map((food) => ({
@@ -61,7 +63,7 @@ const AddConsumption = ({ addConsumption }) => {
         renderInput={(props) => (
           <input
             className="form-control mb-0 mx"
-            disabled={loading}
+            disabled={loading || foods.length < 1}
             {...props}
           />
         )}
