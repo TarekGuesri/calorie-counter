@@ -9,7 +9,6 @@ const Footer = () => {
 
   useEffect(() => {
     return history.listen((location) => {
-      console.log(location.pathname);
       if (location.pathname === '/') {
         setIsHome(true);
       } else {
