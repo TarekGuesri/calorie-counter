@@ -98,7 +98,7 @@ const Login = ({ isAuthenticated, login }) => {
 
         <div className="my-4">
           <p>
-            If you already have an account, sign up{' '}
+            If you do not have an account, sign up{' '}
             <Link style={{ fontWeight: '400' }} to="/register">
               here
             </Link>

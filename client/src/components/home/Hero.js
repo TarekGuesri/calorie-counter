@@ -16,7 +16,7 @@ const Hero = ({ isAuthenticated }) => {
           </p>
           <Link
             className="primary-button btn-lg rounded-pill mt-5 py-2 px-4"
-            to="/today"
+            to={isAuthenticated ? '/today' : '/register'}
             role="button"
           >
             {isAuthenticated ? 'Consumption List' : 'Get Started'}
