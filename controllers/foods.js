@@ -62,7 +62,7 @@ exports.addFood = async (req, res) => {
 
     // If image was uploaded, we save it and added its path to the food's image
     if (req.files && req.files.image) {
-      const image = await Food.addImage(food.id, req.files.image);
+      const image = await Food.addImageImgur(food.id, req.files.image);
 
       // Now we add the image path to the food's image field
       food.image = image;
@@ -133,13 +133,13 @@ exports.editFood = async (req, res) => {
     if (replaceCurrentImage) {
       // Removing current image file if it exists
       if (food.image) {
-        await Food.removeImage(food._id);
+        // await Food.removeImage(food._id);
         food.image = '';
       }
 
       // If image was uploaded, we save it and add its path to the food's image
       if (req.files && req.files.image) {
-        const image = await Food.addImage(food.id, req.files.image);
+        const image = await Food.addImageImgur(food.id, req.files.image);
 
         // Now we add the image path to the food's image field
         food.image = image;

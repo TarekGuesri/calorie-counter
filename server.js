@@ -52,8 +52,6 @@ app.use('/rest', require('./routes/rest'));
 
 // Serve static assets in production
 if (process.env.NODE_ENV === 'production') {
-  app.get('/images', express.static(path.resolve('./uploads')));
-
   // Set static folder
   app.use(express.static('client/build'));
 
