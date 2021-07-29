@@ -27,7 +27,7 @@ const ConsumptionInfo = ({
           </a>
 
           <AsyncButton
-            type="submit"
+            type="button"
             text="Save"
             className="primary-button btn-lg rounded-pill mt-4"
             loading={saving}

@@ -8,6 +8,7 @@ import {
   DELETE_CONSUMPTION,
   CLEAR_CONSUMPTIONS,
   SAVE_CONSUMPTION_LIST,
+  SET_SAVING_LOADING,
   SET_CONSUMPTIONS_LOADING,
 } from './types';
 
@@ -57,6 +58,10 @@ export const deleteConsumption = (id) => (dispatch) => {
 
 // Save Consumption
 export const saveConsumptionList = (consumptionList) => async (dispatch) => {
+  dispatch({
+    type: SET_SAVING_LOADING,
+  });
+
   // Mapping the consumptions for the backend
   const consumptions = consumptionList.map((consumption) => ({
     food: consumption._id,

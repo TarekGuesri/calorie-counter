@@ -8,6 +8,7 @@ import {
   CLEAR_CONSUMPTIONS,
   SAVE_CONSUMPTION_LIST,
   SET_CONSUMPTIONS_LOADING,
+  SET_SAVING_LOADING,
 } from '../actions/types';
 
 const initialState = {
@@ -108,6 +109,13 @@ export default function (state = initialState, action) {
       return {
         ...state,
         saved: true,
+        saving: false,
+      };
+    }
+    case SET_SAVING_LOADING: {
+      return {
+        ...state,
+        saving: true,
       };
     }
     case SET_CONSUMPTIONS_LOADING: {
