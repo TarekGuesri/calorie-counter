@@ -20,7 +20,7 @@ const ConsumptionInfo = ({
           <a
             className="danger-button  btn-lg rounded-pill mt-4"
             role="button"
-            disabled={consumptionList.length <= 0}
+            disabled={consumptionList.length <= 0 || saving}
             onClick={clearConsumptionList}
           >
             Clear
